@@ -82,14 +82,37 @@
         }else{ clearTimeout(v._at); v.pause(); }
       });
       if(Math.abs(k-i)<=1){
-        [].forEach.call(s.querySelectorAll('iframe[data-src]'),function(f){ if(f.getAttribute('src')!==f.getAttribute('data-src')) f.setAttribute('src',f.getAttribute('data-src')); });
+        [].forEach.call(s.querySelectorAll('iframe[data-src]:not([data-ld])'),function(f){ if(f.getAttribute('src')!==f.getAttribute('data-src')) f.setAttribute('src',f.getAttribute('data-src')); });
       }
+      /* videos de la pantalla que viene: se pide solo el primer cuadro para que no haya un destello negro al entrar (sobre todo desde internet) */
+      if(k===i+1){
+        [].forEach.call(s.querySelectorAll('video[data-src]'),function(v,n){
+          if(n>0&&!v.closest('.av')&&v.parentNode&&(v.parentNode.classList.contains('vch')||v.parentNode.classList.contains('chain'))) return;
+          if(!v.getAttribute('src')){ v.preload='metadata'; v.setAttribute('src',v.dataset.src); }
+        });
+      }
+      /* iframes pesados (web y app): se cargan escalonados recién cuando la pantalla está activa y se descargan al salir */
+      [].forEach.call(s.querySelectorAll('iframe[data-ld]'),function(f){
+        clearTimeout(f._ld);
+        if(on){
+          if(f.getAttribute('src')!==f.getAttribute('data-src')){
+            f._ld=setTimeout(function(){
+              f.onload=function(){ if(s.classList.contains('on')){ try{f.contentWindow.postMessage('pitch-start','*');}catch(e){} } };
+              f.setAttribute('src',f.getAttribute('data-src'));
+            },parseFloat(f.dataset.ld)||0);
+          }
+        }else if(f.getAttribute('src')&&f.getAttribute('src')!=='about:blank'){ f.onload=null; f.setAttribute('src','about:blank'); }
+      });
       [].forEach.call(s.querySelectorAll('iframe.pitch-web'),function(f){
         clearTimeout(f._dl);
         var send=function(){ try{f.contentWindow.postMessage(on?'pitch-start':'pitch-stop','*');}catch(e){} };
         if(on && f.dataset.delay){ f._dl=setTimeout(send,parseFloat(f.dataset.delay)); } else { send(); }
       });
       if(!on){ [].forEach.call(s.querySelectorAll('.ophone'),function(e){e.classList.remove('tilt');}); [].forEach.call(s.querySelectorAll('.dlimg'),function(e){e.classList.remove('on');}); }
+      [].forEach.call(s.querySelectorAll('.later'),function(box){
+        clearTimeout(box._tl); box.style.display='none';
+        if(on) box._tl=setTimeout(function(){ if(s.classList.contains('on')) box.style.display='block'; },(parseFloat(box.dataset.after)||0)*1000);
+      });
       [].forEach.call(s.querySelectorAll('.runner'),function(box){
         if(box._raf){ cancelAnimationFrame(box._raf); box._raf=0; }
         if(!on) return;
@@ -158,6 +181,10 @@
 
   document.getElementById('next').addEventListener('click',function(e){e.stopPropagation();next();});
   document.getElementById('prev').addEventListener('click',function(e){e.stopPropagation();prev();});
+  addEventListener('message',function(ev){
+    var d=ev.data; if(!d||!d.pitchKey) return; var k=d.pitchKey;
+    if(k==='ArrowRight'||k==='PageDown') next(); else if(k==='ArrowLeft'||k==='PageUp') prev();
+  });
   addEventListener('keydown',function(e){
     var k=e.key;
     if(k==='ArrowRight'||k==='PageDown'||k===' '||k==='Enter'){e.preventDefault();next();}

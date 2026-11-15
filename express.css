@@ -275,3 +275,4 @@ body.nologo #hud img{visibility:hidden}
 .celu:before{content:"";position:absolute;left:-8px;top:170px;width:6px;height:56px;background:#8a8490;border-radius:3px 0 0 3px;box-shadow:0 84px 0 #8a8490}
 .celu:after{content:"";position:absolute;right:-8px;top:230px;width:6px;height:96px;background:#8a8490;border-radius:0 3px 3px 0}
 .slide.on .fo21{animation:kfo .6s ease 8.6s both}
+.later{display:none}.slide.on .bleed.vo{animation:kfo .6s ease 9.6s both}

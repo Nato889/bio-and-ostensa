@@ -131,10 +131,10 @@ def VS(srcs, names, x, y, w, h, each=4, fx='zoom', d=0, r=0, z=None, poster=''):
     if z is not None: s += 'z-index:%d;' % z
     return '<div class="ab card vseq %s" style="%s" data-seq="%s" data-names="%s" data-each="%s"><video muted loop playsinline preload="none" poster="%s" style="width:100%%;height:100%%;object-fit:cover;display:block;background:#111"></video><div class="vlab"></div><div class="vnum"></div></div>' % (c, s, '|'.join(srcs), '|'.join(names), each, poster)
 
-def PHONE(src, x, y, w=230, fx='fb', d=0, r=0, ld=6, z=None):
+def PHONE(src, x, y, w=230, fx='fb', d=0, r=0, ld=6, z=None, lms=None):
     h = round(w * 2.164); sc = w / 390.0
     zz = 'z-index:%d;' % z if z is not None else ''
-    return '<div class="phone fx f-%s l-fl" style="--d:%ss;--r:%sdeg;--ld:%ss;left:%dpx;top:%dpx;width:%dpx;height:%dpx;border-radius:%dpx;outline-width:5px;%s"><iframe class="pitch-web" data-src="%s" title="app" style="position:absolute;left:0;top:0;width:390px;height:846px;transform:scale(%.4f);transform-origin:0 0;pointer-events:none;border:0" tabindex="-1"></iframe></div>' % (fx, d, r, ld, x, y, w, h, round(w * .14), zz, src, sc)
+    return '<div class="phone fx f-%s l-fl" style="--d:%ss;--r:%sdeg;--ld:%ss;left:%dpx;top:%dpx;width:%dpx;height:%dpx;border-radius:%dpx;outline-width:5px;%s"><iframe class="pitch-web"%s data-src="%s" title="app" style="position:absolute;left:0;top:0;width:390px;height:846px;transform:scale(%.4f);transform-origin:0 0;pointer-events:none;border:0" tabindex="-1"></iframe></div>' % (fx, d, r, ld, x, y, w, h, round(w * .14), zz, (' data-ld="%d"' % lms) if lms else '', src, sc)
 
 # ------------------------------------------------------------------ 01 · VOZ 1 · Ostensa
 b = ''
@@ -364,12 +364,11 @@ S('a clean', 'Redes', b, 'VOZ 3 · LU — «Pasás el dedo por un feed que va r�
 # ------------------------------------------------------------------ 08 · VOZ 3 · web y app
 b = ''
 b += T('Y si quieren más, <span class="y">entran</span>', 96, 60, 70, fx='fl', d=.1, sp=True)
-b += '<div class="browser fx f-fl" style="--d:.4s;--r:-1deg;left:96px;top:190px;width:1040px;height:760px"><div class="bar"><b></b><b></b><b></b><span style="margin-left:14px">bioferia.com.ar</span></div><div style="position:relative;width:1040px;height:722px;overflow:hidden"><iframe class="pitch-web" data-src="web-demo/index.html" title="web" style="position:absolute;left:0;top:0;width:1440px;height:999px;border:0;transform:scale(.7222);transform-origin:0 0;pointer-events:none" tabindex="-1"></iframe></div></div>'
-b += PHONE('web-demo/index.html#fijo=inicio', 1190, 200, w=230, fx='fb', d=.9, r=3, ld=6)
-b += PHONE('app-real/local.html?reset#welcome/0', 1440, 260, w=230, fx='fb', d=1.2, r=-2, ld=7)
-b += PHONE('app-real/local.html?reset#quiz/consumo', 1690, 200, w=230, fx='fb', d=1.5, r=3, ld=8)
-b += ST('Web', 1190, 760, 'dk', 'pop', d=2.0, r=-2, size=24, z=8)
-b += ST('App · una pregunta por día', 1380, 850, 'rd', 'pop', d=2.3, r=2, size=24, z=8)
+b += '<div class="browser fx f-fl" style="--d:.4s;--r:-1deg;left:96px;top:190px;width:1040px;height:760px"><div class="bar"><b></b><b></b><b></b><span style="margin-left:14px">bioferia.com.ar</span></div><div style="position:relative;width:1040px;height:722px;overflow:hidden"><iframe class="pitch-web" data-ld="200" data-src="web-demo/index.html" title="web" style="position:absolute;left:0;top:0;width:1440px;height:999px;border:0;transform:scale(.7222);transform-origin:0 0;pointer-events:none" tabindex="-1"></iframe></div></div>'
+b += PHONE('app-real/local.html?reset#welcome/0', 1230, 190, w=300, fx='fb', d=.9, r=-2, ld=7, lms=900)
+b += PHONE('app-real/local.html?reset#quiz/consumo', 1560, 250, w=300, fx='fb', d=1.2, r=3, ld=8, lms=1800)
+b += ST('Web', 110, 965, 'dk', 'pop', d=2.0, r=-2, size=24, z=8)
+b += ST('App · una pregunta por día', 1330, 940, 'rd', 'pop', d=2.3, r=2, size=24, z=8)
 S('b', 'Web y app', b, 'VOZ 3 · LU — «Podemos seguir alimentándola desde la web… y para todos los días, una app que te acompaña en el bolsillo. Cada día te hace una pregunta, de esas que se contestan en un segundo.» La web real y la app real.', 60, 'blinds')
 
 # ------------------------------------------------------------------ 09 · VOZ 4 · todo lo que estamos sumando
@@ -414,20 +413,22 @@ mm = ['hito-moda-m', 'colgante-m', 'dist-1-m', 'muro-m', 'mercado-m']
 inner = ''.join('<div style="--k:%d;--n:5"><img src="assets/senal2/%s.jpg" style="width:100%%;height:100%%;object-fit:cover" alt=""></div>' % (k, n) for k, n in enumerate(mm))
 b += '<div class="ab card cyc fx f-fb" style="--d:.7s;--cy:10s;--r:2deg;left:96px;top:630px;width:640px;height:330px;background:#222">%s</div>' % inner
 b += ST('Señales que te guían', 110, 970, 'vi', 'pop', d=1.4, r=2, size=22, z=7)
-b += VS(['assets/espacios/entrada-apertura.mp4', 'assets/espacios/info-tickets.mp4', 'assets/espacios/escenario-feria.mp4', 'assets/espacios/charlas1.mp4', 'assets/espacios/expositores.mp4', 'assets/espacios/gazebo.mp4', 'assets/espacios/descanso.mp4', 'assets/espacios/instagrameable360.mp4'],
-        ['Portal de ingreso', 'Boletería e información', 'Escenario principal', 'Charlas y encuentro', 'Stand de expositores', 'Gazebo', 'Área de descanso', 'Instagrameable 360'],
-        790, 170, 1030, 579, each=4, fx='fr', d=.5, r=1, poster='assets/espacios/3di-entrada.jpg')
 pic = sorted(glob.glob('assets/pictos/*.svg'))
 random.seed(11)
 AMORFAS = ['4% 10%,38% 0,96% 6%,100% 52%,94% 100%,52% 94%,0 100%,6% 48%','3% 8%,48% 2%,97% 7%,100% 55%,95% 96%,45% 100%,2% 93%,0 40%','6% 4%,55% 0,100% 10%,96% 58%,100% 96%,50% 98%,0 94%,3% 45%','0 6%,42% 3%,94% 0,98% 46%,92% 100%,40% 95%,5% 100%,4% 52%'];tilec = ['#f0eee4']*4
-tl = []
-for i, p in enumerate(pic):
+def _tile(p, i, sz, im):
     poly = AMORFAS[i % len(AMORFAS)]
-    tl.append('<div style="width:150px;height:150px;margin-right:16px;filter:drop-shadow(6px 8px 0 rgba(0,0,0,.28))"><div style="width:100%%;height:100%%;background:#332e34;clip-path:polygon(%s);display:grid;place-items:center"><div style="width:calc(100%% - 6px);height:calc(100%% - 6px);background:%s;clip-path:polygon(%s);display:grid;place-items:center"><img src="%s" style="width:104px;height:104px" alt=""></div></div></div>' % (poly, tilec[i % 4], poly, p))
-b += MQ(tl, 790, 790, 1130, 170, mt=50)
-b += ST('Íconos: se entienden de un vistazo', 800, 975, 'dk', 'pop', d=1.8, r=-2, size=22, z=7)
-b += ST('Espacios para cada momento', 1500, 130, '', 'drop', d=1.2, r=3, size=26, z=7)
-S('a', 'Recorrer', b, 'VOZ 5 · MARTU — «Esta es la BioFeria que imaginamos para recibirlos. Entrás y todo lo que viste en la pantalla está ahí, en tamaño real. Un mapa que te ubica, señales que te guían, los iconos… y espacios para cada momento.» Mapa, señales, pictogramas y los espacios en video.', 70, 'zoom')
+    return '<div style="width:%dpx;height:%dpx;margin-right:20px;filter:drop-shadow(7px 9px 0 rgba(0,0,0,.28))"><div style="width:100%%;height:100%%;background:#332e34;clip-path:polygon(%s);display:grid;place-items:center"><div style="width:calc(100%% - 6px);height:calc(100%% - 6px);background:#f0eee4;clip-path:polygon(%s);display:grid;place-items:center"><img src="%s" style="width:%dpx;height:%dpx" alt=""></div></div></div>' % (sz, sz, poly, poly, p, im, im)
+for r_, (y_, off_, rev_, mt_) in enumerate([(200, 0, False, 55), (470, 7, True, 65), (740, 14, False, 60)]):
+    seq_ = pic[off_:] + pic[:off_]
+    b += MQ([_tile(p_, k_ + r_, 200, 138) for k_, p_ in enumerate(seq_)], 790, y_, 1130, 230, mt=mt_, rev=rev_)
+b += ST('Íconos: se entienden de un vistazo', 1300, 970, 'dk', 'pop', d=1.8, r=-2, size=24, z=7)
+S('a', 'Recorrer', b, 'VOZ 5 · MARTU — «Esta es la BioFeria que imaginamos para recibirlos. Entrás y todo lo que viste en la pantalla está ahí, en tamaño real. Un mapa que te ubica, señales que te guían, los iconos… y espacios para cada momento.» Mapa, señales y pictogramas (los espacios en video pasaron a la pantalla siguiente).', 40, 'zoom')
+
+# ------------------------------------------------------------------ 14 · VOZ 5 · los espacios en video, uno tras otro a pantalla completa (antes estaban dentro de la pantalla 13)
+esp = ['entrada-apertura', 'info-tickets', 'escenario-feria', 'charlas1', 'expositores', 'gazebo', 'descanso', 'instagrameable360']
+b = BL('<div class="bleed vch" data-rate="1" data-lens="%s" style="background:#111">%s</div>' % (','.join(['4'] * 8), ''.join('<video data-src="assets/espacios/%s.mp4" muted playsinline preload="none"></video>' % e for e in esp)))
+S('a clean', 'Los espacios', b, 'VOZ 5 · MARTU — «…Además hay espacios para cada momento, esos que viste en la web: para llegar, para escuchar, para charlar, para descansar.» Los ocho videos de los espacios (portal, boletería, escenario, charlas, stand, gazebo, descanso y 360), uno tras otro a pantalla completa y sin textos, 4 s cada uno (32 s en total); al terminar vuelve al primero.', 32, 'blinds')
 
 # ------------------------------------------------------------------ 14 · VOZ 5 · Oso sin conexión (sin textos: el oso corre en círculos y después aparece la app grande jugándose sola con la flechita)
 import math as _mm
@@ -484,8 +485,9 @@ b += E('assets/merch/cup-negra.webp', 1060, 790, 330, fx='drop', d=3.1, r=3, z=5
 b += ST('Cuponeras', 1430, 860, 'vi', 'pop', d=3.5, r=-2, size=24, z=8)
 S('a', 'Entrada y kit', b, 'VOZ 6 · LOUR — «Desde que llegás, la invitación y la entrada ya son parte de uno. Además te sumamos el kit de ingreso… los tickets y las cuponeras que sirven para comer y tomar algo.» El video vertical (invitación y entrada, partes 18 y 18.1 encadenadas, en loop) entra desde la izquierda y ocupa todo el alto de la pantalla, pegado al borde izquierdo; del otro lado, el kit de ingreso completo: pulseras, tickets y cuponeras (se quitaron las credenciales y el tote). El título va en dos renglones, arrancando donde termina el video.', 50, 'diag')
 
-# ------------------------------------------------------------------ 19 · VOZ 6 · los objetos (merch)
+# ------------------------------------------------------------------ 20 · VOZ 6 · los objetos (merch): primero el video (10 s, pantalla completa) y después las piezas
 b = ''
+_pre = BL('<div class="bleed vo"><video class="av" data-src="assets/merch/merch-video-20.mp4" muted playsinline preload="none"></video></div>')
 b += '<div class="ghost" style="left:60px;top:430px;font-size:520px;opacity:.07;color:#322e33">MERCH</div>'
 b += T('En tu mesa, en tu mochila, <span class="y">en tu ropa</span>', 96, 70, 66, fx='fl', d=.1, sp=True)
 b += E('assets/merch/tote-png.webp', 90, 290, None, 560, fx='drop', d=.5, r=-4, lp='bo', ld=4.2, z=2)
@@ -496,7 +498,8 @@ b += E('assets/merch/lapices-n.webp', 1380, 250, 470, fx='drop', d=1.7, r=-3, lp
 b += E('assets/merch/cartuchera.webp', 1330, 560, 480, fx='drop', d=2.0, r=3, lp='bo', ld=4.4, z=3)
 for i, (t, x, y) in enumerate([('Tote bag', 130, 880), ('Agenda', 540, 900), ('Taza', 880, 950), ('Remera', 1050, 720), ('Lápices', 1560, 210), ('Cartuchera', 1520, 880)]):
     b += ST(t, x, y, ['dk', 'rd', 'vi', 'dk', 'rd', 'vi'][i], 'pop', d=2.3 + i * .15, r=[-3, 2, -2, 3, -2, 2][i], size=22, z=8)
-S('b', 'Los objetos', b, 'VOZ 6 · LOUR — «Y no nos olvidemos de esos objetos que meten un pedacito de BioFeria en tu día a día: en tu mesa, en tu mochila, en tu escritorio y en tu ropa.» Salen remera, taza, agenda, tote, cartuchera y lápices.', 40, 'circle')
+b = _pre + '<div class="later" data-after="9.8" style="position:absolute;left:0;top:0;width:1920px;height:1080px">' + b + '</div>'
+S('b clean', 'Los objetos', b, 'VOZ 6 · LOUR — «Y no nos olvidemos de esos objetos que meten un pedacito de BioFeria en tu día a día: en tu mesa, en tu mochila, en tu escritorio y en tu ropa.» Primero entra el video del merch (10 s, a pantalla completa) y después salen remera, taza, agenda, tote, cartuchera y lápices.', 50, 'circle')
 
 # ------------------------------------------------------------------ 21 · VOZ 6 · todas las piezas en una pantalla
 mos = (['assets/ig/feed/f%02d.jpg' % i for i in (1, 4, 8, 12, 16, 20)] + ['assets/posters/poster%02d.jpg' % i for i in (1, 2, 3, 4, 5, 6, 7)]

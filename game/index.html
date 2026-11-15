@@ -758,6 +758,7 @@ requestAnimationFrame(frame);
   cur.innerHTML='<svg viewBox="0 0 24 24" width="46" height="46" style="filter:drop-shadow(2px 3px 0 rgba(0,0,0,.45))"><path d="M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.7 L11 13.3 L18 13 Z" fill="#F0EEE4" stroke="#332E34" stroke-width="1.5" stroke-linejoin="round"/></svg>';
   function mount(){if(!cur.parentNode)document.body.appendChild(cur)}
   function say(m){try{parent.postMessage(m,'*')}catch(e){}}
+  document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k==='ArrowLeft'||k==='PageDown'||k==='PageUp'){say({pitchKey:k});}},true);
   var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms)})};
   function until(cond,max){return new Promise(function(res){var t0=Date.now();(function p(){if(cond()||Date.now()-t0>(max||15000))return res();setTimeout(p,150)})()})}
   function ok(my){return on&&tok===my}
@@ -800,7 +801,7 @@ requestAnimationFrame(frame);
     for(var i=1;i<=name.length;i++){await sleep(200);if(!ok(my))return;nm.value=name.slice(0,i);nm.dispatchEvent(new Event('input',{bubbles:true}))}
     await sleep(250);if(!ok(my))return;
     moveTo(q('nmOk'),.5,.5);await sleep(700);if(!ok(my))return;
-    ripple();q('nmOk').click();
+    ripple();q('nmOk').click();try{nm.blur()}catch(e){}
     await sleep(1100);if(!ok(my))return;
     /* 5 · descargar: solo el gesto (no se descarga nada); la presentación inclina el celular y muestra la imagen */
     var dl=q('btnDl');bring(dl);await sleep(650);if(!ok(my))return;
@@ -813,7 +814,7 @@ requestAnimationFrame(frame);
     ripple();await sleep(250);
     if(ok(my))cycle();
   }
-  function start(){if(on)return;on=true;cycle()}
+  function start(){if(on)return;on=true;var sn=q('snd');if(sn&&/sí/.test(sn.textContent))sn.click();cycle()}
   function stop(){var was=on;on=false;tok++;cur.style.opacity='0';say('oso-dl-off');if(was)setTimeout(function(){location.reload()},50)}
   addEventListener('message',function(ev){if(ev.data==='pitch-start')start();else if(ev.data==='pitch-stop')stop()});
   if(demo)setTimeout(start,300);
