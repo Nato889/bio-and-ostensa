@@ -104,12 +104,12 @@
         })(t0);
       });
       [].forEach.call(s.querySelectorAll('.vch'),function(box){
-        var vs=[].slice.call(box.querySelectorAll('video')), rate=parseFloat(box.dataset.rate)||1, rates=(box.dataset.rates||'').split(',').map(parseFloat);
-        vs.forEach(function(v){ v.onended=null; });
+        var vs=[].slice.call(box.querySelectorAll('video')), rate=parseFloat(box.dataset.rate)||1, rates=(box.dataset.rates||'').split(',').map(parseFloat), lens=(box.dataset.lens||'').split(',').map(parseFloat);
+        vs.forEach(function(v){ v.onended=null; }); clearTimeout(box._lt);
         if(!on){ vs.forEach(function(v){ v.pause(); v.classList.remove('act'); }); return; }
         vs.forEach(function(v){ if(!v.getAttribute('src')) v.setAttribute('src',v.dataset.src); v.muted=true; v.preload='auto'; v.pause(); try{v.currentTime=0;}catch(e){} v.classList.remove('act'); });
-        function go(k){ var v0=vs[k]; v0.classList.add('act'); setTimeout(function(){ vs.forEach(function(w,n){ if(n!==k) w.classList.remove('act'); }); },380); var v=vs[k]; try{v.currentTime=0;}catch(e){} v.playbackRate=rates[k]||rate; var q=v.play(); if(q&&q.catch) q.catch(function(){}); }
-        vs.forEach(function(v,n){ v.onended=function(){ go((n+1)%vs.length); }; });
+        var cur=-1; function go(k){ cur=k; var v0=vs[k]; v0.classList.add('act'); setTimeout(function(){ vs.forEach(function(w,n){ if(n!==k){ w.classList.remove('act'); w.pause(); } }); },380); var v=vs[k]; try{v.currentTime=0;}catch(e){} v.playbackRate=rates[k]||rate; clearTimeout(box._lt); if(lens[k]){ box._lt=setTimeout(function(){ go((k+1)%vs.length); },lens[k]*1000); } var q=v.play(); if(q&&q.catch) q.catch(function(){}); }
+        vs.forEach(function(v,n){ v.onended=function(){ if(cur===n) go((n+1)%vs.length); }; });
         go(0);
       });
       [].forEach.call(s.querySelectorAll('.chain'),function(box){
