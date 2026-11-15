@@ -1,0 +1,18 @@
+PITCH "EL HECHO" · EXPRESS v2 · 22 pantallas en el orden del guion nuevo (seis voces)
+Es una COPIA del express (../pitch-hecho-express, que NO se toca) con las piezas del 2D: videos de los espacios, mockup del librito, credenciales en movimiento, la app real, etc.
+
+Abrir:        index.html (Chrome, pantalla completa con F)
+Teclas:       ← → / espacio avanzar · F pantalla completa · T cronómetro (15:00) · N notas (cada una dice la voz y la frase) · M sonido del video
+Editar:       las pantallas están en _work/gen.py; después correr `python3 build.py`
+Subir a Netlify: `python3 _work/empaquetar.py` y arrastrar la carpeta ../publicar-hecho-express-v2
+
+PLACEHOLDERS (cuadro punteado amarillo): faltan estas piezas. Cuando estén, dejarlas en la ruta y correr build.py:
+  - Pantalla 6: foto del colectivo / afiche a tamaño grande
+  - Pantalla 9: video de la persona caminando con el celu frente a un afiche
+  - Pantalla 11: foto 360 de la Reserva (planeta)
+Pendiente de decidir: cubo Rubik de pictogramas y caja de regalo del merch (en el 2D son animaciones, no videos).
+
+VIDEOS NUEVOS (media/): video concepto de la Voz 1 → assets/ostensa/v3-alta-video-concepto-75perceto.mp4 (pantalla 1) · video de indumentaria → assets/indumentaria/indu-bio-v1.mp4 (pantalla 12).
+OJO: el video concepto pesa 313 MB; conviene una exportación más liviana (30-60 MB) antes de subir a Netlify.
+
+ACTUALIZADO: pantalla 1 = assets/ostensa/final-sin-sonido.mp4 (copia de 'FINAAAAL CON SONID .mp4' sin la pista de audio; es HEVC). Pantalla 20 (antepenúltima) = assets/ostensa/v3-alta-video-concepto-75perceto.mp4.
