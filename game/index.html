@@ -796,7 +796,8 @@ requestAnimationFrame(frame);
     /* 4 · la tarjeta: escribir el nombre */
     var nm=q('nm');bring(nm);await sleep(650);if(!ok(my))return;
     moveTo(nm,.4,.5);await sleep(700);if(!ok(my))return;
-    ripple();nm.focus();
+    // La escritura es simulada: no quitarle el foco al teclado del pitch.
+    ripple();
     var name='Ana';
     for(var i=1;i<=name.length;i++){await sleep(200);if(!ok(my))return;nm.value=name.slice(0,i);nm.dispatchEvent(new Event('input',{bubbles:true}))}
     await sleep(250);if(!ok(my))return;

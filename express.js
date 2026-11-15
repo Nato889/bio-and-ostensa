@@ -169,9 +169,12 @@
       else{ s.classList.remove('on','out'); }
     });
     document.body.classList.toggle('clean',slides[i].classList.contains('clean'));document.body.classList.toggle('nologo',slides[i].classList.contains('nologo'));document.body.dataset.tone=slides[i].classList.contains('tone-b')?'b':'a';
-    cnt.textContent=String(i+1).padStart(2,'0')+' / '+String(N).padStart(2,'0');
+    cnt.textContent=String(i+1).padStart(2,'0');
     bar.style.width=((i+1)/N*100)+'%';
-    document.getElementById('prev').disabled=i===0; document.getElementById('next').disabled=i===N-1;
+    // Recuperar el teclado si una demo embebida habia tomado el foco.
+    if(document.activeElement&&document.activeElement.tagName==='IFRAME'){
+      document.getElementById('stage').focus({preventScroll:true});
+    }
     var a=slides[i].querySelector('aside.n'); notes.innerHTML=a?a.innerHTML:'';
     media(i);
     if(i>0&&t0===null){ t0=Date.now(); }
@@ -179,8 +182,6 @@
   }
   function next(){ go(cur+1); } function prev(){ go(cur-1); }
 
-  document.getElementById('next').addEventListener('click',function(e){e.stopPropagation();next();});
-  document.getElementById('prev').addEventListener('click',function(e){e.stopPropagation();prev();});
   addEventListener('message',function(ev){
     var d=ev.data; if(!d||!d.pitchKey) return; var k=d.pitchKey;
     if(k==='ArrowRight'||k==='PageDown') next(); else if(k==='ArrowLeft'||k==='PageUp') prev();
@@ -203,7 +204,7 @@
   mute.addEventListener('click',function(e){e.stopPropagation();toggleSound();});
   document.getElementById('stage').addEventListener('click',function(e){
     if(e.target.closest('video[controls]')) return;
-    (e.clientX<innerWidth*.28)?prev():next();
+    (e.clientX<innerWidth*.5)?prev():next();
   });
   var sx=null; addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
   addEventListener('touchend',function(e){ if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50){dx<0?next():prev();} sx=null; },{passive:true});

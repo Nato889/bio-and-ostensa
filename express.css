@@ -147,7 +147,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 #hud .lg-l{display:none}
 body[data-tone="b"] #hud .lg-d{display:none}
 body[data-tone="b"] #hud .lg-l{display:block}
-#cnt{font:700 17px var(--f-ui);letter-spacing:.28em;color:#f1ede4;opacity:.8}
+#cnt{font:700 17px var(--f-ui);letter-spacing:.28em;color:#f1ede4;opacity:.45}
 body[data-tone="b"] #cnt{color:#322e33}
 #prog{position:fixed;left:0;right:0;bottom:0;height:7px;z-index:50;background:rgba(127,127,127,.18)}
 #prog i{display:block;height:100%;width:0;background:var(--yellow);transition:width .5s}

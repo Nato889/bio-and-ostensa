@@ -413,7 +413,7 @@ mm = ['hito-moda-m', 'colgante-m', 'dist-1-m', 'muro-m', 'mercado-m']
 inner = ''.join('<div style="--k:%d;--n:5"><img src="assets/senal2/%s.jpg" style="width:100%%;height:100%%;object-fit:cover" alt=""></div>' % (k, n) for k, n in enumerate(mm))
 b += '<div class="ab card cyc fx f-fb" style="--d:.7s;--cy:10s;--r:2deg;left:96px;top:630px;width:640px;height:330px;background:#222">%s</div>' % inner
 b += ST('Señales que te guían', 110, 970, 'vi', 'pop', d=1.4, r=2, size=22, z=7)
-pic = sorted(glob.glob('assets/pictos/*.svg'))
+pic = sorted(p.replace(os.sep, '/') for p in glob.glob('assets/pictos/*.svg'))
 random.seed(11)
 AMORFAS = ['4% 10%,38% 0,96% 6%,100% 52%,94% 100%,52% 94%,0 100%,6% 48%','3% 8%,48% 2%,97% 7%,100% 55%,95% 96%,45% 100%,2% 93%,0 40%','6% 4%,55% 0,100% 10%,96% 58%,100% 96%,50% 98%,0 94%,3% 45%','0 6%,42% 3%,94% 0,98% 46%,92% 100%,40% 95%,5% 100%,4% 52%'];tilec = ['#f0eee4']*4
 def _tile(p, i, sz, im):
@@ -426,9 +426,9 @@ b += ST('Íconos: se entienden de un vistazo', 1300, 970, 'dk', 'pop', d=1.8, r=
 S('a', 'Recorrer', b, 'VOZ 5 · MARTU — «Esta es la BioFeria que imaginamos para recibirlos. Entrás y todo lo que viste en la pantalla está ahí, en tamaño real. Un mapa que te ubica, señales que te guían, los iconos… y espacios para cada momento.» Mapa, señales y pictogramas (los espacios en video pasaron a la pantalla siguiente).', 40, 'zoom')
 
 # ------------------------------------------------------------------ 14 · VOZ 5 · los espacios en video, uno tras otro a pantalla completa (antes estaban dentro de la pantalla 13)
-esp = ['entrada-apertura', 'info-tickets', 'escenario-feria', 'charlas1', 'expositores', 'gazebo', 'descanso', 'instagrameable360']
-b = BL('<div class="bleed vch" data-rate="1" data-lens="%s" style="background:#111">%s</div>' % (','.join(['4'] * 8), ''.join('<video data-src="assets/espacios/%s.mp4" muted playsinline preload="none"></video>' % e for e in esp)))
-S('a clean', 'Los espacios', b, 'VOZ 5 · MARTU — «…Además hay espacios para cada momento, esos que viste en la web: para llegar, para escuchar, para charlar, para descansar.» Los ocho videos de los espacios (portal, boletería, escenario, charlas, stand, gazebo, descanso y 360), uno tras otro a pantalla completa y sin textos, 4 s cada uno (32 s en total); al terminar vuelve al primero.', 32, 'blinds')
+esp = ['info-tickets', 'escenario-feria', 'charlas1', 'expositores', 'gazebo', 'descanso', 'instagrameable360']
+b = BL('<div class="bleed vch" data-rate="1" data-lens="%s" style="background:#111">%s</div>' % (','.join(['4'] * len(esp)), ''.join('<video data-src="assets/espacios/%s.mp4" muted playsinline preload="none"></video>' % e for e in esp)))
+S('a clean', 'Los espacios', b, 'VOZ 5 · MARTU — «…Además hay espacios para cada momento, esos que viste en la web: para llegar, para escuchar, para charlar, para descansar.» Los siete videos de los espacios (boletería, escenario, charlas, stand, gazebo, descanso y 360), uno tras otro a pantalla completa y sin textos, 4 s cada uno (28 s en total); al terminar vuelve al primero.', 28, 'blinds')
 
 # ------------------------------------------------------------------ 14 · VOZ 5 · Oso sin conexión (sin textos: el oso corre en círculos y después aparece la app grande jugándose sola con la flechita)
 import math as _mm
@@ -521,13 +521,8 @@ m21 = b
 
 # ------------------------------------------------------------------ 22 · VOZ 6 · cierre
 imgs = ''.join('<img src="assets/cierre/m%02d.webp" alt="" loading="lazy">' % i for i in range(1, 89))
-fin = ('<div class="fin" style="place-items:center;padding:0"><div style="display:flex;align-items:center;gap:60px;--j:3px;background:#332e34;padding:78px 120px" class="amo3 fx-fin">'
-       '<div style="--k:0;text-align:center"><div style="position:relative;font-size:56px;padding:20px 56px;display:inline-block;--j:2px" class="st big amo4">Sumate a encontrar lo que falta</div>'
-       '<div style="font:700 28px var(--f-ui);letter-spacing:.2em;text-transform:uppercase;margin-top:26px;opacity:.9">BioFeria 2027 · Ostensa</div></div>'
-       '<img style="--k:1;width:230px;background:#fff;padding:12px" src="assets/qr.png" alt="QR">'
-       '<img style="--k:2;width:360px" src="assets/libro/manual-mockup.webp" alt="manual"></div></div>')
-b = BL('<div class="bleed mtg" data-start="9">%s</div>' % imgs) + '<div class="fo21" style="position:absolute;left:0;top:0;width:1920px;height:1080px">' + m21 + '</div>' + fin
-S('a', 'Todo en una pantalla y cierre', b, 'VOZ 6 · LOUR — «Ese pequeño descubrimiento resume la experiencia que queremos abrir. BioFeria ya convoca a personas con ganas de involucrarse… Sumate a encontrar lo que falta.» Pantalla unida (antes 21 y 22): primero el mosaico con todas las piezas y la frase «Ya convoca a personas con ganas de involucrarse» (unos 9 s); después el montaje de cierre y, al final, la tarjeta «Sumate a encontrar lo que falta» con el QR y el manual. (QR: confirmar la URL final). Se quitó la pantalla «primera impresión».', 60, 'up')
+b = BL('<div class="bleed mtg" data-start="9">%s</div>' % imgs) + '<div class="fo21" style="position:absolute;left:0;top:0;width:1920px;height:1080px">' + m21 + '</div>'
+S('a', 'Todo en una pantalla y cierre', b, 'VOZ 6 · LOUR — «Ese pequeño descubrimiento resume la experiencia que queremos abrir. BioFeria ya convoca a personas con ganas de involucrarse… Sumate a encontrar lo que falta.» Pantalla unida (antes 21 y 22): primero el mosaico con todas las piezas y la frase «Ya convoca a personas con ganas de involucrarse» (unos 9 s); después el montaje de cierre, sin tarjeta superpuesta, QR ni miniatura del manual. Se quitó la pantalla «primera impresión».', 60, 'up')
 
 # ===================================================================================
 html = '\n\n'.join(SLIDES)
