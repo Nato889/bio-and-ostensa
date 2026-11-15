@@ -47,17 +47,21 @@
 
   /* ---- montaje final ---- */
   var mtgTimer=null;
+  var mtgDelay=null;
   function runMontage(sl){
     var box=sl.querySelector('.mtg'); if(!box) return;
     var im=[].slice.call(box.querySelectorAll('img')), k=0;
     sl.classList.remove('fin-on'); im.forEach(function(x){x.classList.remove('on');});
-    clearInterval(mtgTimer);
-    mtgTimer=setInterval(function(){
-      if(!sl.classList.contains('on')){ clearInterval(mtgTimer); return; }
-      im.forEach(function(x){x.classList.remove('on');});
-      if(k<im.length){ im[k].classList.add('on'); k++; }
-      else{ clearInterval(mtgTimer); im[im.length-1].classList.add('on'); sl.classList.add('fin-on'); }
-    },105);
+    clearInterval(mtgTimer); clearTimeout(mtgDelay);
+    mtgDelay=setTimeout(function(){
+      if(!sl.classList.contains('on')) return;
+      mtgTimer=setInterval(function(){
+        if(!sl.classList.contains('on')){ clearInterval(mtgTimer); return; }
+        im.forEach(function(x){x.classList.remove('on');});
+        if(k<im.length){ im[k].classList.add('on'); k++; }
+        else{ clearInterval(mtgTimer); im[im.length-1].classList.add('on'); sl.classList.add('fin-on'); }
+      },105);
+    },(parseFloat(box.dataset.start)||0)*1000);
   }
 
   /* ---- video / iframes ---- */

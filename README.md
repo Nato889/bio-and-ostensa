@@ -1,6 +1,6 @@
 # BioFeria · Pitch express v2 (Ostensa)
 
-Presentación HTML de 22 pantallas (seis voces: NATI · SOLE · LU · JOR · MARTU · LOUR). No necesita instalar nada para presentarla.
+Presentación HTML de 20 pantallas (seis voces: NATI · SOLE · LU · JOR · MARTU · LOUR). No necesita instalar nada para presentarla.
 
 ## Cómo verla / presentarla
 1. Bajá el repositorio (botón verde **Code → Download ZIP**, o `git clone`).
@@ -34,10 +34,9 @@ python3 build.py
 - `web-demo/` la web de la pantalla 8.
 - `_work/` generador de pantallas y scripts auxiliares (`oso2.py` y `pix3.py` son de los dibujos del osito y de los cuadros de píxeles; los resultados ya están en `assets/`).
 
-## Un video grande que NO está en el repositorio
-GitHub no acepta archivos de más de 100 MB. El video concepto largo de la pantalla 20 (`v3-alta-video-concepto-75perceto.mp4`, ~299 MB) está en la sección **Releases** del repositorio (etiqueta `video-concepto`).
-- La presentación lo busca primero en `assets/ostensa/v3-alta-video-concepto-75perceto.mp4` y, si no está, lo carga de Releases (necesita internet).
-- Para presentar sin internet, bajalo de Releases y dejalo en esa ruta.
+## Videos grandes
+GitHub no acepta archivos de más de 100 MB dentro del repositorio. Si una pantalla necesita un video así, hay que subirlo a **Releases** (o exportarlo más liviano) y no al repositorio.
+- El video concepto largo (`v3-alta-video-concepto-75perceto.mp4`, ~299 MB) ya **no se usa** en la presentación; quedó guardado en Releases (etiqueta `video-concepto`) solo como respaldo.
 
 ## Reglas del proyecto (para no romper nada)
 - Paleta: rojo `#f44530`, azul `#0c6fdc`, violeta `#7779de`, crema `#f0eee4`, oscuro `#332e34`, amarillo `#fdff1a`.

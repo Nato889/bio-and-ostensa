@@ -348,7 +348,7 @@ b += T('Sumate a encontrar <span class="y">lo que falta.</span>', 96, 850, 100, 
 S('a', 'Sumate a encontrar lo que falta', b, 'VOZ 2 · SOLE — «Sumate a encontrar lo que falta. Porque a toda feria le falta algo, y la mejor forma de encontrarlo es entre muchos.» Cartel animado.', 50, 'up')
 
 # ------------------------------------------------------------------ 06 · VOZ 3 · el afiche de la calle (tres videos empalmados, a pantalla completa, sin textos)
-b = BL('<div class="bleed vch" data-rate="1" data-rates="1.8,1,1.1" style="background:#111"><video data-src="assets/calle/calle1.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle2-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle3.mp4" muted playsinline preload="none"></video></div>')
+b = BL('<div class="bleed vch" data-rate="1" data-rates="1.8,1,1.1" style="background:#111"><video data-src="assets/calle/calle1.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle2-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle3-b.mp4" muted playsinline preload="none"></video></div>')
 S('a clean', 'El afiche de la calle', b, 'VOZ 3 · LU — «Imaginen que van al trabajo y, mientras esperan el colectivo, se cruzan con una imagen que les llama la atención… “Che, nunca lo había visto de esa manera”.» Tres videos (calle 1, 2 y 3) empalmados uno tras otro, a pantalla completa y sin textos, calle 1 a 1,8×, calle 3 a 1,1× y calle 2 (nueva, de 3,9 s) a 1×, para que la secuencia dure unos 22 s (el texto de esta pantalla dura 22 s); al terminar el tercero vuelve al primero.', 22, 'left')
 
 # ------------------------------------------------------------------ 07 · VOZ 3 · primero «lo que se mueve» (loops + historias animadas) y después el video del feed a pantalla completa, todo en la misma pantalla
@@ -499,14 +499,6 @@ for i, (t, x, y) in enumerate([('Tote bag', 130, 880), ('Agenda', 540, 900), ('T
     b += ST(t, x, y, ['dk', 'rd', 'vi', 'dk', 'rd', 'vi'][i], 'pop', d=2.3 + i * .15, r=[-3, 2, -2, 3, -2, 2][i], size=22, z=8)
 S('b', 'Los objetos', b, 'VOZ 6 · LOUR — «Y no nos olvidemos de esos objetos que meten un pedacito de BioFeria en tu día a día: en tu mesa, en tu mochila, en tu escritorio y en tu ropa.» Salen remera, taza, agenda, tote, cartuchera y lápices.', 40, 'circle')
 
-# ------------------------------------------------------------------ 20 · VOZ 6 · la primera impresión vuelve
-b = ''
-b += V('assets/ostensa/v3-alta-video-concepto-75perceto.mp4', '', 96, 110, 1100, 619, fx='zoom', d=.3, r=-1.2, cls='card', st='outline:6px solid #f1ede4', z=2, src2='https://github.com/Nato889/bio-and-ostensa/releases/download/video-concepto/v3-alta-video-concepto-75perceto.mp4')
-b += T('Al comienzo guardamos<br>una <span class="y">primera impresión</span>', 1240, 150, 64, fx='fr', sp=True, d=.8, lh='1')
-b += P('Cuando apareció el contexto, pudimos volver a mirarla.', 1240, 400, 600, 38, fx='fr', d=1.6, weight=600)
-b += ST('Con todo el contexto alrededor', 1240, 560, 'rd', 'slam', d=2.6, r=-3, size=34)
-S('a', 'La primera impresión', b, 'VOZ 6 · LOUR — «Al comienzo guardamos una primera impresión. Cuando apareció el contexto, pudimos volver a mirarla.» Vuelve el video concepto (v3-alta), ahora con el contexto alrededor.', 40, 'zoom')
-
 # ------------------------------------------------------------------ 21 · VOZ 6 · todas las piezas en una pantalla
 mos = (['assets/ig/feed/f%02d.jpg' % i for i in (1, 4, 8, 12, 16, 20)] + ['assets/posters/poster%02d.jpg' % i for i in (1, 2, 3, 4, 5, 6, 7)]
        + ['assets/merch/tote-png.webp', 'assets/merch/agenda-png.webp', 'assets/merch/taza-png.webp', 'assets/merch/cartuchera.webp']
@@ -523,7 +515,7 @@ for i, p in enumerate(mos[:cols * rows]):
     b += D('<img src="%s" style="width:100%%;height:100%%;object-fit:cover" alt="" loading="lazy">' % p, 0 + c * cw, 70 + r * (ch_ + 6) - (0 if r % 2 == 0 else 0), cw, ch_, fx='pop', d=.2 + i * .12, r=random.choice([-2, 1.5, -1, 2]), cls='card', st='box-shadow:6px 8px 0 rgba(0,0,0,.35)')
 b += D('<div style="width:100%;height:100%;filter:drop-shadow(8px 10px 0 rgba(0,0,0,.4))"><div style="--j:2.6px;width:100%;height:100%;background:#332e34" class="amo2"></div></div>', 56, 752, 1150, 270, fx='fb', d=4.0, z=7)
 b += T('Ya convoca a personas<br>con ganas de <span class="y">involucrarse</span>', 96, 790, 84, fx='fb', sp=True, d=4.2, z=8, lh='.98')
-S('a', 'Todo en una pantalla', b, 'VOZ 6 · LOUR — «Ese pequeño descubrimiento resume la experiencia que queremos abrir. BioFeria ya convoca a personas con ganas de involucrarse.» Todas las piezas se juntan en una sola pantalla, como un mosaico.', 40, 'up')
+m21 = b
 
 # ------------------------------------------------------------------ 22 · VOZ 6 · cierre
 imgs = ''.join('<img src="assets/cierre/m%02d.webp" alt="" loading="lazy">' % i for i in range(1, 89))
@@ -532,8 +524,8 @@ fin = ('<div class="fin" style="place-items:center;padding:0"><div style="displa
        '<div style="font:700 28px var(--f-ui);letter-spacing:.2em;text-transform:uppercase;margin-top:26px;opacity:.9">BioFeria 2027 · Ostensa</div></div>'
        '<img style="--k:1;width:230px;background:#fff;padding:12px" src="assets/qr.png" alt="QR">'
        '<img style="--k:2;width:360px" src="assets/libro/manual-mockup.webp" alt="manual"></div></div>')
-b = BL('<div class="bleed mtg">%s</div>' % imgs) + fin
-S('a', 'Cierre', b, 'VOZ 6 · LOUR — «Sumate a encontrar lo que falta.» Video en loop y la slide final tipo créditos de película, con los QR. Acá entra también el manual de identidad en la biblioteca, que no se nombra pero tiene que verse. (QR: confirmar la URL final).', 60, 'zoom')
+b = BL('<div class="bleed mtg" data-start="9">%s</div>' % imgs) + '<div class="fo21" style="position:absolute;left:0;top:0;width:1920px;height:1080px">' + m21 + '</div>' + fin
+S('a', 'Todo en una pantalla y cierre', b, 'VOZ 6 · LOUR — «Ese pequeño descubrimiento resume la experiencia que queremos abrir. BioFeria ya convoca a personas con ganas de involucrarse… Sumate a encontrar lo que falta.» Pantalla unida (antes 21 y 22): primero el mosaico con todas las piezas y la frase «Ya convoca a personas con ganas de involucrarse» (unos 9 s); después el montaje de cierre y, al final, la tarjeta «Sumate a encontrar lo que falta» con el QR y el manual. (QR: confirmar la URL final). Se quitó la pantalla «primera impresión».', 60, 'up')
 
 # ===================================================================================
 html = '\n\n'.join(SLIDES)
