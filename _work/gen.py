@@ -347,19 +347,19 @@ b += T('Sumate a encontrar <span class="y">lo que falta.</span>', 96, 850, 100, 
 S('a', 'Sumate a encontrar lo que falta', b, 'VOZ 2 · SOLE — «Sumate a encontrar lo que falta. Porque a toda feria le falta algo, y la mejor forma de encontrarlo es entre muchos.» Cartel animado.', 50, 'up')
 
 # ------------------------------------------------------------------ 06 · VOZ 3 · el afiche de la calle (tres videos empalmados, a pantalla completa, sin textos)
-b = BL('<div class="bleed vch" data-rate="1" data-rates="1.8,1,1.1,1.67" data-lens="0,0,0,5.9" style="background:#111"><video data-src="assets/calle/calle1.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle2-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle3-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle4.mp4" muted playsinline preload="none"></video></div>')
-S('a clean', 'El afiche de la calle', b, 'VOZ 3 · LU — «Imaginen que van al trabajo y, mientras esperan el colectivo, se cruzan con una imagen que les llama la atención… “Che, nunca lo había visto de esa manera”.» Cuatro videos (calle 1, 2, 3 y 4) empalmados uno tras otro, a pantalla completa y sin textos. Velocidades: calle 1 a 1,8×, calle 2 a 1×, calle 3 a 1,1× (unos 15 s en total, como antes) y calle 4 a 1,67× (6 s más, cortado justo antes del último cuadro que sale negro): unos 21 s en total. Al terminar el cuarto vuelve al primero.', 21, 'left')
+b = BL('<div class="bleed vch" data-rate="1" data-rates="1.8,1,1.1,1.67" data-lens="0,0,0,5.9" style="background:#111"><video data-src="assets/calle/calle1.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle2-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle3-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle4-sin-cuadro-final.mp4" muted playsinline preload="none"></video></div>')
+S('a clean', 'El afiche de la calle', b, 'VOZ 3 · LU — «Imaginen que van al trabajo y, mientras esperan el colectivo, se cruzan con una imagen que les llama la atención… “Che, nunca lo había visto de esa manera”.» Cuatro videos (calle 1, 2, 3 y 4) empalmados uno tras otro, a pantalla completa y sin textos. Velocidades: calle 1 a 1,8×, calle 2 a 1×, calle 3 a 1,1× (unos 15 s en total, como antes) y calle 4 a 1,67× (6 s más, sin el cuadro final de los dos afiches sobre negro): unos 21 s en total. Al terminar el cuarto vuelve al primero.', 21, 'left')
 
-# ------------------------------------------------------------------ 07 · VOZ 3 · primero «lo que se mueve» (loops + historias animadas) y después el video del feed a pantalla completa, todo en la misma pantalla
+# ------------------------------------------------------------------ 07 · VOZ 3 · primero el feed completo y despues las historias, en la misma pantalla
 estaticas = ['assets/ig/est/e%02d.jpg' % i for i in range(1, 11)]
 anis = ['assets/ig/ani/a%02d.jpg' % i for i in range(1, 11)]
-b = BL('<div class="bleed vd7"><video class="av" data-src="assets/redes/ig-feed-07.mp4" data-at="7.8" muted loop playsinline preload="none"></video></div>')
+b = BL('<div class="bleed vd7"><video class="av" data-src="assets/redes/ig-feed-07.mp4" data-reveal="stories" muted playsinline preload="none"></video></div>')
 b += '<div class="fo7" style="position:absolute;left:0;top:0;width:1920px;height:1080px">'
 b += MQ([IM(p_, 169, 300, 'margin-right:16px;border-radius:10px;box-shadow:8px 10px 0 rgba(0,0,0,.35)') for p_ in estaticas], 0, 215, 1920, 320, mt=50, st='')
 b += MQ([IM(p_, 169, 300, 'margin-right:16px;border-radius:10px;box-shadow:8px 10px 0 rgba(0,0,0,.35)') for p_ in anis], 0, 555, 1920, 320, mt=60, rev=True)
-b += '<div class="celu fx f-zoom" style="--d:.5s;--r:-2deg;left:745px;top:105px;width:430px;height:870px;z-index:5"><div class="scr"><video class="av" data-src="assets/ig/historias.mp4" poster="assets/ig/historias.jpg" muted loop playsinline preload="none"></video></div><i class="isl"></i></div>'
+b += '<div class="celu fx f-zoom" style="--d:.5s;--r:-2deg;left:745px;top:105px;width:430px;height:870px;z-index:5"><div class="scr"><video class="av" data-src="assets/ig/historias.mp4" data-wait="feed" poster="assets/ig/historias.jpg" muted loop playsinline preload="none"></video></div><i class="isl"></i></div>'
 b += '</div>'
-S('a clean', 'Redes', b, 'VOZ 3 · LU — «Pasás el dedo por un feed que va rápido, y algo te frena. Abrís una historia, y otra, y empiezan a moverse…» Primero lo que se mueve (las diez historias estáticas y las diez animadas, en tiras que corren en sentidos opuestos, con el celular pasando historias al medio), sin textos; a los ~8 s entra a pantalla completa el video del feed de Instagram y queda hasta el final.', 40, 'left')
+S('a clean', 'Redes', b, 'VOZ 3 · LU — «Pasás el dedo por un feed que va rápido, y algo te frena. Abrís una historia, y otra, y empiezan a moverse…» Primero el video completo del feed de Instagram; al terminar aparecen las tiras de historias estaticas y animadas con el celular pasando historias al medio.', 40, 'left')
 
 # ------------------------------------------------------------------ 08 · VOZ 3 · web y app
 b = ''
@@ -389,8 +389,8 @@ S('a', 'Y por fin llegamos', b, 'VOZ 4 · JOR — «Así, cuando finalmente lleg
 
 # ------------------------------------------------------------------ 11 · VOZ 4 · la Reserva
 b = ''
-b += '<!--BL--><div class="bleed chain"><video class="c1" data-src="assets/reserva/video-parte1.mp4" muted playsinline preload="none"></video><video class="c2" data-src="assets/reserva/video-parte2.mp4" muted playsinline preload="none"></video></div><!--/BL-->'
-S('a clean', 'La Reserva', b, 'VOZ 4 · JOR — «Reserva Ecológica Costanera Sur… plantas, animales, especies… ¿Se imaginan disfrutar de BioFeria en un entorno así?» Pantalla limpia: solo el video de la Reserva Ecológica, en dos partes que se encadenan (parte 1 y después parte 2).', 40, 'blinds')
+b += '<!--BL--><div class="bleed"><video class="av" data-src="assets/reserva/recorrido-reserva-v4-sin-sonido-extendido.mp4" muted playsinline preload="none"></video></div><!--/BL-->'
+S('a clean', 'La Reserva', b, 'VOZ 4 · JOR — «Reserva Ecológica Costanera Sur… plantas, animales, especies… ¿Se imaginan disfrutar de BioFeria en un entorno así?» Pantalla limpia: recorrido reserva v4 sin audio, con dos segundos adicionales del ultimo cuadro, sin deformacion.', 40, 'blinds')
 
 # ------------------------------------------------------------------ 12 · VOZ 4 · cada persona, su rol (indumentaria)
 b = ''
@@ -523,6 +523,22 @@ m21 = b
 imgs = ''.join('<img src="assets/cierre/m%02d.webp" alt="" loading="lazy">' % i for i in range(1, 89))
 b = BL('<div class="bleed mtg" data-start="9">%s</div>' % imgs) + '<div class="fo21" style="position:absolute;left:0;top:0;width:1920px;height:1080px">' + m21 + '</div>'
 S('a', 'Todo en una pantalla y cierre', b, 'VOZ 6 · LOUR — «Ese pequeño descubrimiento resume la experiencia que queremos abrir. BioFeria ya convoca a personas con ganas de involucrarse… Sumate a encontrar lo que falta.» Pantalla unida (antes 21 y 22): primero el mosaico con todas las piezas y la frase «Ya convoca a personas con ganas de involucrarse» (unos 9 s); después el montaje de cierre, sin tarjeta superpuesta, QR ni miniatura del manual. Se quitó la pantalla «primera impresión».', 60, 'up')
+
+
+# ------------------------------------------------------------------ 22 · Video concepto con sonido y avance automatico
+b = BL('<div class="bleed"><video class="av" data-src="assets/ostensa/video-concepto-cierre-con-sonido.mp4" data-snd="1" data-autosound="1" data-next="1" playsinline preload="none"></video></div>')
+S('a clean', 'Video concepto', b, 'Video concepto completo con sonido. Al finalizar avanza automaticamente a Segui con la experiencia.', 53, 'up')
+
+# ------------------------------------------------------------------ 23 · Segui con la experiencia
+b = '<div class="closing-videos vch">' + ''.join('<video data-src="assets/cierre-videos/pieza-%02d.mp4" muted playsinline preload="none"></video>' % i for i in range(1, 7)) + '</div>'
+b += T('Seguí con<br><span class="y">la experiencia</span>', 780, 90, 100, fx='fb', d=.1, w=1080, lh='1.02')
+b += '<div class="qr-grid">'
+b += "<a class=\"qr-card\" href=\"https://web-biobyostensa.netlify.app/\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"assets/cierre-qr/web.png\" alt=\"QR: Web\"><span>Web</span></a>"
+b += "<a class=\"qr-card\" href=\"https://bioferia-app.vercel.app/#welcome/0\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"assets/cierre-qr/app.png\" alt=\"QR: App\"><span>App</span></a>"
+b += "<a class=\"qr-card\" href=\"https://claude.ai/artifact/TLqTEsjNuRPyxYzXG45buD\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"assets/cierre-qr/juego.png\" alt=\"QR: Jueguito\"><span>Jueguito</span></a>"
+b += "<a class=\"qr-card\" href=\"https://www.figma.com/design/Uw3IziPhIKbeLgcD4brIXM/Bioferia-%C2%B7-Presentaci%C3%B3n-por-temas?node-id=3-577&amp;p=f&amp;m=dev\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"assets/cierre-qr/presentacion.png\" alt=\"QR: Todo el material\"><span>Todo el material</span></a>"
+b += '</div>'
+S('a nologo', 'Segui con la experiencia', b, 'Seis videos verticales completos en secuencia y en bucle. QR de web, app, juego y presentacion del material en Figma.', 60, 'up')
 
 # ===================================================================================
 html = '\n\n'.join(SLIDES)
