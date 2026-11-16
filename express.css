@@ -283,3 +283,10 @@ body.nologo #hud img{visibility:hidden}
 .celu:after{content:"";position:absolute;right:-8px;top:230px;width:6px;height:96px;background:#8a8490;border-radius:0 3px 3px 0}
 .slide.on .fo21{animation:kfo .6s ease 8.6s both}
 .later{display:none}.slide.on .bleed.vo{animation:kfo .6s ease 9.6s both}
+
+/* Inicio manual del primer video. */
+.video-start{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;display:grid;place-items:center;width:clamp(64px,7vw,100px);aspect-ratio:1;border-radius:50%;background:rgba(50,46,51,.82);border:2px solid var(--cream);color:var(--cream);box-shadow:0 4px 24px #0005;transition:background .2s}
+.video-start svg{width:48%;height:48%}
+.video-start:hover{background:var(--dark)}
+.video-start:focus-visible{outline:3px solid var(--yellow);outline-offset:6px}
+.video-start[hidden]{display:none}

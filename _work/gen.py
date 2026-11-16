@@ -139,8 +139,8 @@ def PHONE(src, x, y, w=230, fx='fb', d=0, r=0, ld=6, z=None, lms=None):
 # ------------------------------------------------------------------ 01 · VOZ 1 · Ostensa
 b = ''
 vid1 = 'assets/ostensa/final-sin-sonido.mp4'
-b += VB(vid1)
-S('a clean', 'Ostensa', b, 'VOZ 1 · NATI — «Buenas tardes, somos Ostensa…» Pantalla limpia: solo el video concepto, sin textos, logo ni interfaz.', 70, 'circle')
+b += BL('<div class="bleed"><video class="av" data-src="%s" data-manual="1" muted loop playsinline preload="metadata"></video><button class="video-start" type="button" aria-label="Reproducir video"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M11 6 27 16 11 26Z" fill="currentColor"/></svg></button></div>' % vid1)
+S('a clean', 'Ostensa', b, 'VOZ 1 · NATI — «Buenas tardes, somos Ostensa…» Video concepto a pantalla completa. Espera el boton de play para comenzar; el boton desaparece al reproducir. Al volver a esta slide, queda pausado desde el inicio.', 70, 'circle')
 
 # ------------------------------------------------------------------ 02 · VOZ 1 · el osito y el punto de partida
 TT = 32.0

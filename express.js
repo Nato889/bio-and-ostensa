@@ -65,6 +65,20 @@
   }
 
   /* ---- video / iframes ---- */
+  [].forEach.call(document.querySelectorAll('.video-start'),function(button){
+    var v=button.parentNode.querySelector('video'), slide=button.closest('.slide');
+    button.addEventListener('click',function(e){
+      e.stopPropagation();
+      if(!slide.classList.contains('on')) return;
+      var p=v.play(); if(p&&p.catch) p.catch(function(){});
+    });
+    button.addEventListener('keydown',function(e){
+      if(e.key===' '||e.key==='Enter') e.stopPropagation();
+    });
+    v.addEventListener('playing',function(){
+      if(slide.classList.contains('on')){ button.hidden=true; button.blur(); }
+    });
+  });
   function media(i){
     if(window.BioferiaSlide8){
       window.BioferiaSlide8.stop();
@@ -93,6 +107,9 @@
           };
           if(v.dataset.rate) v.playbackRate=parseFloat(v.dataset.rate);
           clearTimeout(v._at);
+          if(v.dataset.manual==='1'){
+            v.pause(); v.parentNode.querySelector('.video-start').hidden=false; return;
+          }
           if(v.dataset.wait==='feed'){ v.pause(); return; }
           if(v.dataset.at){ v.pause(); v._at=setTimeout(function(){ try{v.currentTime=parseFloat(v.dataset.from||0);}catch(e){} var q=v.play(); if(q&&q.catch) q.catch(function(){}); },parseFloat(v.dataset.at)*1000); }
           else{ var p=v.play(); if(p&&p.catch) p.catch(function(){
