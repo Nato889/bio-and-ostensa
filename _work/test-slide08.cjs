@@ -39,9 +39,25 @@ function harness(){
     }
     throw Error('Timers did not settle');
   }
-  return {api:context.window.BioferiaSlide8,slide,scene,events,eventTimes,styles,typed,status,web,app,webWin,appWin,advance,tasks,reset(){route='home';answer=false;events.length=0;eventTimes.length=0;}};
+  return {api:context.window.BioferiaSlide8,slide,scene,events,eventTimes,styles,typed,status,web,app,webDoc,webWin,appWin,advance,tasks,reset(){route='home';answer=false;events.length=0;eventTimes.length=0;}};
 }
 (async()=>{
+  for(const height of [4000,12000]){
+    const sync=harness();sync.webDoc.documentElement.scrollHeight=height;
+    const playback=sync.api.start(sync.slide);
+    await sync.advance(8000);
+    const sideY=sync.webWin.scrollY;
+    // Simular contenido que cambia de alto despues de reducir la web.
+    sync.webDoc.documentElement.scrollHeight+=1800;
+    await sync.advance(13000);
+    const bottom=sync.webDoc.documentElement.scrollHeight-sync.webWin.innerHeight;
+    assert.equal(sync.events.at(-1),'compare');
+    assert.ok(sync.webWin.scrollY>sideY);
+    assert.ok(Math.abs(bottom-sync.webWin.scrollY)<bottom*.002,'La web debe llegar al final junto con la comparacion');
+    await sync.advance(500);
+    assert.ok(sync.webWin.scrollY<bottom-20,'El scroll debe continuar despues de llegar al final');
+    sync.api.stop();await sync.advance();await playback;assert.equal(sync.tasks.size,0);
+  }
   const h=harness();let run=h.api.start(h.slide);
   await h.advance(4000);assert.equal(h.typed.textContent,'www.bioferia.com.ar');assert.equal(h.events.length,0);
   await h.advance(4000);assert.ok(h.scene.classList.contains('split'));const sideScroll=h.webWin.scrollY;
@@ -61,5 +77,5 @@ function harness(){
   h.api.stop();h.reset();run=h.api.start(h.slide);await h.advance(15500);
   const beforeExit=h.events.slice();assert.ok(beforeExit.length>0&&beforeExit.length<4);
   h.api.stop();await h.advance();await run;assert.deepEqual(h.events,beforeExit);assert.equal(h.tasks.size,0);
-  console.log('PASS: 26-second timeline, app at 8s, continuous scroll, hidden leaf, quiz, cancellation, restart');
+  console.log('PASS: web reaches bottom at comparison (21s), dynamic page heights, 26-second timeline, app at 8s, continuous scroll, hidden leaf, quiz, cancellation, restart');
 })().catch(e=>{console.error(e);process.exitCode=1;});

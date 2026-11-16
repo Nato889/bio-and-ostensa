@@ -32,11 +32,24 @@
     }
     async function keepWebScrolling(doc){
       const win=web.contentWindow;
-      let last=performance.now(),direction=1;
+      const scrollStarted=performance.now(),bottomAt=started+21000;
+      let last=scrollStarted,direction=1,firstPass=true;
       while(!signal.aborted){
         await wait(16);
         const now=performance.now(),max=Math.max(0,doc.documentElement.scrollHeight-win.innerHeight);
-        let y=win.scrollY+direction*145*(now-last)/1000;last=now;
+        const elapsed=now-last;
+        let y;
+        if(firstPass){
+          // Recorrer toda la altura disponible al aparecer la comparacion del quiz.
+          // Recalcular lo restante tambien contempla imagenes que cargan mas tarde.
+          const remaining=bottomAt-last;
+          y=remaining>0?win.scrollY+(max-win.scrollY)*Math.min(1,elapsed/remaining):max;
+          if(now>=bottomAt){y=max;firstPass=false;direction=-1;}
+        }else{
+          const speed=max/Math.max(1,(bottomAt-scrollStarted)/1000);
+          y=win.scrollY+direction*speed*elapsed/1000;
+        }
+        last=now;
         // Al llegar al extremo, volver sin pausas ni saltar de golpe al inicio.
         if(y>max){y=Math.max(0,2*max-y);direction=-1;}
         else if(y<0){y=Math.min(max,-y);direction=1;}
