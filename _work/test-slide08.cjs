@@ -6,13 +6,13 @@ const path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../slide08.js'),'utf8');
 function harness(){
   let time=0,id=0,route='home',answer=false;
-  const tasks=new Map(),events=[];
+  const tasks=new Map(),events=[],eventTimes=[],styles=[];
   const classes=()=>{const set=new Set();return {add(...v){v.forEach(x=>set.add(x));},remove(...v){v.forEach(x=>set.delete(x));},contains(v){return set.has(v);}};};
   const el=()=>({classList:classes(),style:{},dataset:{},textContent:''});
   const hand=el(),typed=el(),enter=el(),status=el();
   const appWin={innerHeight:926,scrollY:0,scrollTo(x,y){this.scrollY=y;}};
   const webWin={innerHeight:722,scrollY:0,scrollTo(x,y){this.scrollY=y;}};
-  const target=(next,y=300,disabled=false)=>({disabled,getBoundingClientRect(){return {left:24,top:y-appWin.scrollY,bottom:y-appWin.scrollY+60,width:380,height:60};},click(){events.push(next);if(next==='answer')answer=true;else{route=next;appWin.scrollY=0;}}});
+  const target=(next,y=300,disabled=false)=>({disabled,getBoundingClientRect(){return {left:24,top:y-appWin.scrollY,bottom:y-appWin.scrollY+60,width:380,height:60};},click(){events.push(next);eventTimes.push(time);if(next==='answer')answer=true;else{route=next;appWin.scrollY=0;}}});
   const appDoc={querySelector(s){
     if(s==='.page-home')return route==='home'?el():null;
     if(s==='.pitch-hand')return hand;
@@ -23,7 +23,7 @@ function harness(){
     if(s==='.quiz-comparison')return route==='compare'?{getBoundingClientRect(){return {bottom:1100-appWin.scrollY};}}:null;
     return null;
   }};
-  const webDoc={documentElement:{style:{},scrollHeight:4000},querySelector(){return el();},createElement:el,head:{appendChild(){}},getElementById(){return {getBoundingClientRect(){return {top:1800};}};}};
+  const webDoc={documentElement:{style:{},scrollHeight:4000},querySelector(){return el();},createElement:el,head:{appendChild(style){styles.push(style.textContent);}}};
   const web={contentDocument:webDoc,contentWindow:webWin},app={contentDocument:appDoc,contentWindow:appWin};
   const scene=el();scene.querySelector=s=>({'.s8-web':web,'.s8-app':app,'.s8-typed':typed,'.s8-enter':enter,'.s8-status':status})[s];
   const slide={querySelector(){return scene;}};
@@ -39,22 +39,27 @@ function harness(){
     }
     throw Error('Timers did not settle');
   }
-  return {api:context.window.BioferiaSlide8,slide,scene,events,typed,status,web,app,webWin,appWin,advance,tasks,reset(){route='home';answer=false;events.length=0;}};
+  return {api:context.window.BioferiaSlide8,slide,scene,events,eventTimes,styles,typed,status,web,app,webWin,appWin,advance,tasks,reset(){route='home';answer=false;events.length=0;eventTimes.length=0;}};
 }
 (async()=>{
   const h=harness();let run=h.api.start(h.slide);
   await h.advance(4000);assert.equal(h.typed.textContent,'www.bioferia.com.ar');assert.equal(h.events.length,0);
-  await h.advance();await run;
+  await h.advance(4000);assert.ok(h.scene.classList.contains('split'));const sideScroll=h.webWin.scrollY;
+  await h.advance(4000);assert.ok(h.webWin.scrollY>sideScroll);assert.deepEqual(h.events,['question']);
+  await h.advance(13999);assert.equal(h.scene.dataset.finished,undefined);
+  await h.advance(1);await run;
   assert.deepEqual(h.events,['question','answer','choice','compare']);
   assert.equal(h.scene.dataset.finished,'true');assert.equal(h.status.textContent,'');
-  assert.equal(h.webWin.scrollY,1800);assert.ok(h.appWin.scrollY>0);
+  assert.deepEqual(h.eventTimes,[11000,14500,17800,21000]);assert.ok(h.appWin.scrollY>0);
+  assert.ok(h.styles.some(css=>css.includes('.leaf-fly{display:none!important}')));
+  const afterQuiz=h.webWin.scrollY;await h.advance(1000);assert.notEqual(h.webWin.scrollY,afterQuiz);
   h.api.stop();assert.equal(h.web.src,'about:blank');assert.equal(h.app.src,'about:blank');
   h.reset();run=h.api.start(h.slide);await h.advance(5000);h.api.stop();await h.advance();await run;
   assert.deepEqual(h.events,[]);assert.equal(h.tasks.size,0);assert.equal(h.scene.dataset.finished,undefined);
   h.reset();run=h.api.start(h.slide);await h.advance();await run;
   assert.deepEqual(h.events,['question','answer','choice','compare']);
-  h.api.stop();h.reset();run=h.api.start(h.slide);await h.advance(26000);
+  h.api.stop();h.reset();run=h.api.start(h.slide);await h.advance(15500);
   const beforeExit=h.events.slice();assert.ok(beforeExit.length>0&&beforeExit.length<4);
   h.api.stop();await h.advance();await run;assert.deepEqual(h.events,beforeExit);assert.equal(h.tasks.size,0);
-  console.log('PASS: URL, web scroll, quiz order, final comparison, cancellation, restart');
+  console.log('PASS: 26-second timeline, app at 8s, continuous scroll, hidden leaf, quiz, cancellation, restart');
 })().catch(e=>{console.error(e);process.exitCode=1;});

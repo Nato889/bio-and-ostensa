@@ -368,7 +368,7 @@ b = """<div class="s8-sequence">
 <div class="s8-phone"><div class="s8-phone-screen"><iframe class="s8-app" title="Demo animada del quiz de Bioferia" tabindex="-1"></iframe></div></div>
 <div class="s8-caption">Una pregunta por día. Otras formas de mirar.</div><div class="s8-status" role="status"></div>
 </div>"""
-S('b nologo', 'Web y app', b, 'VOZ 3 · LU — Se escribe www.bioferia.com.ar y Enter abre la web casi a pantalla completa. Scroll suave; la ventana se reduce a la izquierda y entra el celular desde Inicio. Un cursor de mano abre el quiz de ropa, elige una respuesta, continúa y muestra la elección junto a otras miradas. La comparación queda visible. Al volver a entrar, todo se reinicia.', 60, 'blinds')
+S('b nologo', 'Web y app', b, 'VOZ 3 · LU — Se escribe www.bioferia.com.ar y Enter abre la web casi a pantalla completa. Scroll suave; la ventana se reduce a la izquierda y entra el celular desde Inicio. Un cursor de mano abre el quiz de ropa, elige una respuesta, continúa y muestra la elección junto a otras miradas. Secuencia de 26 s: app desde el segundo 8, comparación desde el 22. Scroll web continuo aun al costado y despues del quiz; sin hoja flotante. Al volver a entrar, todo se reinicia.', 26, 'blinds')
 
 # ------------------------------------------------------------------ 09 · VOZ 4 · todo lo que estamos sumando
 b = ''
