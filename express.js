@@ -256,7 +256,9 @@
   mute.addEventListener('click',function(e){e.stopPropagation();toggleSound();});
   document.getElementById('stage').addEventListener('click',function(e){
     if(e.target.closest('video[controls],a,button,input,textarea,select')) return;
-    (e.clientX<innerWidth*.5)?prev():next();
+    var edge=innerWidth*.15;
+    if(e.clientX<edge) prev();
+    else if(e.clientX>innerWidth-edge) next();
   });
   var sx=null; addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
   addEventListener('touchend',function(e){ if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50){dx<0?next():prev();} sx=null; },{passive:true});
