@@ -149,8 +149,6 @@ body[data-tone="b"] #hud .lg-d{display:none}
 body[data-tone="b"] #hud .lg-l{display:block}
 #cnt{font:700 17px var(--f-ui);letter-spacing:.28em;color:#f1ede4;opacity:.45}
 body[data-tone="b"] #cnt{color:#322e33}
-#prog{position:fixed;left:0;right:0;bottom:0;height:7px;z-index:50;background:rgba(127,127,127,.18)}
-#prog i{display:block;height:100%;width:0;background:var(--yellow);transition:width .5s}
 #tm{position:fixed;right:22px;bottom:20px;z-index:51;font:800 26px var(--f-ui);letter-spacing:.08em;background:#fdff1a;color:#322e33;padding:6px 16px;display:none}
 #tm.show{display:block}#tm.over{background:#f44530;color:#f1ede4}
 #notes{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;background:rgba(20,18,22,.94);color:#f1ede4;padding:20px 34px 26px;font:500 24px/1.4 var(--f-ui)}
@@ -237,7 +235,7 @@ body:hover .nav{opacity:.5}.nav:hover{opacity:1!important}
 .vseq .vnum{position:absolute;right:34px;bottom:34px;font:800 30px var(--f-ui);letter-spacing:.2em;color:#fdff1a;text-shadow:0 3px 14px rgba(0,0,0,.7)}
 
 /* pantalla limpia: solo el video, sin interfaz */
-body.clean #hud,body.clean #prog,body.clean #help,body.clean #tm,body.clean .nav{opacity:0!important;visibility:hidden}
+body.clean #hud,body.clean #help,body.clean #tm,body.clean .nav{opacity:0!important;visibility:hidden}
 body.nologo #hud img{visibility:hidden}
 #hud img{display:none!important}
 .chain video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#111}.chain .c2{opacity:0}.chain.p2 .c2{opacity:1}.chain.p2 .c1{opacity:0}

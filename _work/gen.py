@@ -527,7 +527,7 @@ b = BL('<div class="bleed"><video class="av" data-src="assets/ostensa/video-conc
 S('a clean', 'Video concepto', b, 'Video concepto completo con sonido. Al finalizar avanza automaticamente a Segui con la experiencia.', 53, 'up')
 
 # ------------------------------------------------------------------ 23 · Segui con la experiencia
-b = '<div class="closing-videos vch">' + ''.join('<video data-src="assets/cierre-videos/pieza-%02d.mp4" muted playsinline preload="none"></video>' % i for i in range(1, 7)) + '</div>'
+b = '<div class="closing-videos vch">' + ''.join('<video data-src="assets/cierre-videos/pieza-%02d.mp4?v=20261115-v2" muted playsinline preload="none"></video>' % i for i in range(1, 7)) + '</div>'
 b += T('Seguí con<br><span class="y">la experiencia</span>', 780, 90, 100, fx='fb', d=.1, w=1080, lh='1.02')
 b += '<div class="qr-grid">'
 b += "<a class=\"qr-card\" href=\"https://web-biobyostensa.netlify.app/\" target=\"_blank\" rel=\"noopener noreferrer\"><img src=\"assets/cierre-qr/web.png\" alt=\"QR: Web\"><span>Web</span></a>"

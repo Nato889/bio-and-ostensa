@@ -2,7 +2,7 @@
 (function(){
   var slides=[].slice.call(document.querySelectorAll('.slide')), N=slides.length, cur=-1, t0=null;
   var root=document.documentElement;
-  var cnt=document.getElementById('cnt'), bar=document.querySelector('#prog i'), tm=document.getElementById('tm');
+  var cnt=document.getElementById('cnt'), tm=document.getElementById('tm');
   var notes=document.getElementById('notes'), help=document.getElementById('help'), mute=document.getElementById('mute');
   var TARGET=15*60;
 
@@ -204,7 +204,6 @@
     });
     document.body.classList.toggle('clean',slides[i].classList.contains('clean'));document.body.classList.toggle('nologo',slides[i].classList.contains('nologo'));document.body.dataset.tone=slides[i].classList.contains('tone-b')?'b':'a';
     cnt.textContent=String(i+1).padStart(2,'0');
-    bar.style.width=((i+1)/N*100)+'%';
     // Recuperar el teclado si una demo embebida habia tomado el foco.
     if(document.activeElement&&document.activeElement.tagName==='IFRAME'){
       document.getElementById('stage').focus({preventScroll:true});
