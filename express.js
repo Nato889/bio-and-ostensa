@@ -3,7 +3,7 @@
   var slides=[].slice.call(document.querySelectorAll('.slide')), N=slides.length, cur=-1, t0=null;
   var root=document.documentElement;
   var cnt=document.getElementById('cnt'), tm=document.getElementById('tm');
-  var notes=document.getElementById('notes'), help=document.getElementById('help'), mute=document.getElementById('mute');
+  var notes=document.getElementById('notes'), mute=document.getElementById('mute');
   var TARGET=15*60;
 
   /* ---- escala del lienzo ---- */
@@ -250,7 +250,6 @@
     tm.classList.toggle('over',s>TARGET);
   },500);
 
-  help.classList.add('show'); setTimeout(function(){help.classList.remove('show');},5000);
   var h=parseInt((location.hash||'').slice(1),10);
   go(isNaN(h)?0:h-1);
 })();

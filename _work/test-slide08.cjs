@@ -53,9 +53,11 @@ function harness(){
     const bottom=sync.webDoc.documentElement.scrollHeight-sync.webWin.innerHeight;
     assert.equal(sync.events.at(-1),'compare');
     assert.ok(sync.webWin.scrollY>sideY);
-    assert.ok(Math.abs(bottom-sync.webWin.scrollY)<bottom*.002,'La web debe llegar al final junto con la comparacion');
+    assert.ok(Math.abs(sync.webWin.scrollY-230*18.5)<5,'Ritmo intermedio constante aunque cambie la altura');
+    const before=sync.webWin.scrollY;
+    assert.ok(before<bottom,'No forzar llegada al final junto con el quiz');
     await sync.advance(500);
-    assert.ok(sync.webWin.scrollY<bottom-20,'El scroll debe continuar despues de llegar al final');
+    assert.ok(Math.abs(sync.webWin.scrollY-before-115)<5,'Mantener el mismo ritmo despues de la comparacion');
     sync.api.stop();await sync.advance();await playback;assert.equal(sync.tasks.size,0);
   }
   const h=harness();let run=h.api.start(h.slide);
@@ -77,5 +79,5 @@ function harness(){
   h.api.stop();h.reset();run=h.api.start(h.slide);await h.advance(15500);
   const beforeExit=h.events.slice();assert.ok(beforeExit.length>0&&beforeExit.length<4);
   h.api.stop();await h.advance();await run;assert.deepEqual(h.events,beforeExit);assert.equal(h.tasks.size,0);
-  console.log('PASS: web reaches bottom at comparison (21s), dynamic page heights, 26-second timeline, app at 8s, continuous scroll, hidden leaf, quiz, cancellation, restart');
+  console.log('PASS: steady intermediate scroll at 230px/s, dynamic page heights, 26-second timeline, app at 8s, continuous scroll, hidden leaf, quiz, cancellation, restart');
 })().catch(e=>{console.error(e);process.exitCode=1;});
