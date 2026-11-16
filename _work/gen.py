@@ -525,7 +525,7 @@ S('a', 'Todo en una pantalla y cierre', b, 'VOZ 6 · LOUR — «Ese pequeño des
 
 
 # ------------------------------------------------------------------ 22 · Video concepto con sonido y avance automatico
-b = BL('<div class="bleed"><video class="av" data-src="assets/ostensa/video-concepto-cierre-con-sonido.mp4" data-snd="1" data-autosound="1" data-next="1" playsinline preload="none"></video></div>')
+b = BL('<div class="bleed"><video class="av" data-src="assets/ostensa/video-concepto-cierre-con-sonido.mp4" data-snd="1" data-hide-sound="1" data-autosound="1" data-next="1" playsinline preload="none"></video></div>')
 S('a clean', 'Video concepto', b, 'Video concepto completo con sonido. Al finalizar avanza automaticamente a Segui con la experiencia.', 53, 'up')
 
 # ------------------------------------------------------------------ 23 · Segui con la experiencia

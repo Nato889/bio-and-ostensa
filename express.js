@@ -189,7 +189,7 @@
       if(on) runMontage(s); else s.classList.remove('fin-on');
     });
     var has=slides[i].querySelector('video.av[data-snd]');
-    mute.classList.toggle('show',!!has);
+    mute.classList.toggle('show',!!has&&has.dataset.hideSound!=='1');
     if(has) mute.textContent=has.muted?'🔇 M · activar sonido':'🔊 M · silenciar';
   }
 
