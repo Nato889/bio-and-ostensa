@@ -255,6 +255,7 @@ body.nologo #hud img{visibility:hidden}
 @keyframes kg1{from{transform:translateX(-101%)}to{transform:none}}@keyframes kg2{from{transform:translateX(101%)}to{transform:none}}@keyframes kg3{from{transform:translateY(101%)}to{transform:none}}
 .grid16 .g2 video{transform:scale(1.25)}
 .vch{background:#e6e3dd}.vch video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s}.vch video.act{opacity:1;z-index:2}
+.vleft.fullscreen{width:100%;aspect-ratio:auto;z-index:30;background:#111!important}
 
 /* pantalla 4: forma y contraforma a pantalla completa */
 .fgx{background:#332e34}.fga,.fgb{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}

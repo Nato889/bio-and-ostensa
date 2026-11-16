@@ -151,13 +151,15 @@
       [].forEach.call(s.querySelectorAll('.vch'),function(box){
         var vs=[].slice.call(box.querySelectorAll('video')), rate=parseFloat(box.dataset.rate)||1, rates=(box.dataset.rates||'').split(',').map(parseFloat), lens=(box.dataset.lens||'').split(',').map(parseFloat);
         vs.forEach(function(v){ v.onended=null; }); clearTimeout(box._lt); clearTimeout(box._fade);
-        if(!on){ vs.forEach(function(v){ v.pause(); v.classList.remove('act'); }); return; }
+        if(!on){ box.classList.remove('fullscreen'); vs.forEach(function(v){ v.pause(); v.classList.remove('act'); }); return; }
         vs.forEach(function(v){ if(!v.getAttribute('src')) v.setAttribute('src',v.dataset.src); v.muted=true; v.preload='auto'; v.pause(); try{v.currentTime=0;}catch(e){} v.classList.remove('act'); });
         var cur=-1; function go(k){
           if(!s.classList.contains('on')) return;
           cur=k;
           vs.forEach(function(w,n){ if(n!==k) w.pause(); });
-          var v=vs[k]; v.classList.add('act');
+          var v=vs[k], fullscreen=v.dataset.fullscreen==='1';
+          if(box.classList.contains('fullscreen')!==fullscreen) vs.forEach(function(w){ w.classList.remove('act'); });
+          box.classList.toggle('fullscreen',fullscreen); v.classList.add('act');
           clearTimeout(box._fade);
           box._fade=setTimeout(function(){ vs.forEach(function(w,n){ if(n!==k) w.classList.remove('act'); }); },380);
           try{v.currentTime=0;}catch(e){} v.playbackRate=rates[k]||rate;

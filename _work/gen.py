@@ -463,7 +463,7 @@ S('a', 'Posters', b, 'VOZ 5 · MARTU — «Y también hay posters, para llevarte
 # ------------------------------------------------------------------ 18 · VOZ 6 · invitación, kit, credenciales, tickets
 # El video vertical (invitación + entrada, partes 18 y 18.1 encadenadas) entra desde la izquierda y queda en el margen izquierdo; el resto de las piezas flotan del otro lado.
 b = ''
-b += BL('<div class="vleft vch" style="background:transparent"><video data-src="assets/entrada/entrada-invitacion-18.mp4" muted playsinline preload="none"></video><video data-src="assets/entrada/entrada-invitacion-18-1.mp4" muted playsinline preload="none"></video><video data-src="assets/entrada/entrega-ticket.mp4" muted playsinline preload="none" style="object-fit:contain"></video></div>')
+b += BL('<div class="vleft vch" style="background:transparent"><video data-src="assets/entrada/entrada-invitacion-18.mp4" muted playsinline preload="none"></video><video data-src="assets/entrada/entrada-invitacion-18-1.mp4" muted playsinline preload="none"></video><video data-src="assets/entrada/entrega-ticket.mp4" data-fullscreen="1" muted playsinline preload="none" style="object-fit:contain"></video></div>')
 b += T('Desde que llegás,<br><span class="y">ya es parte de uno</span>', 700, 40, 72, fx='fl', d=.5, sp=True, lh='1')
 b += ST('El kit de ingreso', 1500, 90, 'rd', 'pop', d=1.2, r=2, size=36, z=8)
 b += E('assets/acc/pulsera-oscura.webp', 700, 215, 450, fx='fr', d=.9, r=4, lp='fl', ld=6)
@@ -475,7 +475,7 @@ b += ST('Tickets', 1700, 505, 'cr', 'pop', d=2.6, r=-2, size=24, z=8)
 b += E('assets/merch/cup-blanca.webp', 700, 775, 330, fx='drop', d=2.8, r=-4, z=5)
 b += E('assets/merch/cup-negra.webp', 1060, 790, 330, fx='drop', d=3.1, r=3, z=5)
 b += ST('Cuponeras', 1430, 860, 'vi', 'pop', d=3.5, r=-2, size=24, z=8)
-S('a', 'Entrada y kit', b, 'VOZ 6 · LOUR — «Desde que llegás, la invitación y la entrada ya son parte de uno. Además te sumamos el kit de ingreso… los tickets y las cuponeras que sirven para comer y tomar algo.» El video vertical (invitación y entrada, partes 18 y 18.1 encadenadas, seguidas por entrega-ticket.mp4, en loop y sin sonido) entra desde la izquierda y ocupa todo el alto de la pantalla, pegado al borde izquierdo; del otro lado, el kit de ingreso completo: pulseras, tickets y cuponeras (se quitaron las credenciales y el tote). El nuevo clip de entrega del ticket conserva su encuadre completo, centrado en el bloque izquierdo. El título va en dos renglones, arrancando donde termina el video.', 50, 'diag')
+S('a', 'Entrada y kit', b, 'VOZ 6 · LOUR — «Desde que llegás, la invitación y la entrada ya son parte de uno. Además te sumamos el kit de ingreso… los tickets y las cuponeras que sirven para comer y tomar algo.» El video vertical (invitación y entrada, partes 18 y 18.1 encadenadas, seguidas por entrega-ticket.mp4, en loop y sin sonido) entra desde la izquierda y ocupa todo el alto de la pantalla, pegado al borde izquierdo; del otro lado, el kit de ingreso completo: pulseras, tickets y cuponeras (se quitaron las credenciales y el tote). Al iniciar el nuevo clip de entrega del ticket, el video ocupa toda la pantalla por encima del kit, titulo y demas piezas, conservando su encuadre completo. Al reiniciar la secuencia vuelve a la columna izquierda. El título va en dos renglones, arrancando donde termina el video.', 50, 'diag')
 
 # ------------------------------------------------------------------ 20 · VOZ 6 · los objetos (merch): primero el video (10 s, pantalla completa) y después las piezas
 b = ''
