@@ -424,8 +424,8 @@ S('a', 'Recorrer', b, 'VOZ 5 · MARTU — «Esta es la BioFeria que imaginamos p
 
 # ------------------------------------------------------------------ 14 · VOZ 5 · los espacios en video, uno tras otro a pantalla completa (antes estaban dentro de la pantalla 13)
 esp = ['info-tickets', 'escenario-feria', 'charlas1', 'expositores', 'gazebo', 'descanso', 'instagrameable360']
-b = BL('<div class="bleed vch" data-rate="1" data-lens="%s" style="background:#111">%s</div>' % (','.join(['4'] * len(esp)), ''.join('<video data-src="assets/espacios/%s.mp4" muted playsinline preload="none"></video>' % e for e in esp)))
-S('a clean', 'Los espacios', b, 'VOZ 5 · MARTU — «…Además hay espacios para cada momento, esos que viste en la web: para llegar, para escuchar, para charlar, para descansar.» Los siete videos de los espacios (boletería, escenario, charlas, stand, gazebo, descanso y 360), uno tras otro a pantalla completa y sin textos, 4 s cada uno (28 s en total); al terminar vuelve al primero.', 28, 'blinds')
+b = BL('<div class="bleed vch" data-rate="1.25" data-lens="%s" style="background:#111">%s</div>' % (','.join(['3.2'] * len(esp)), ''.join('<video data-src="assets/espacios/%s.mp4" muted playsinline preload="none"></video>' % e for e in esp)))
+S('a clean', 'Los espacios', b, 'VOZ 5 · MARTU — «…Además hay espacios para cada momento, esos que viste en la web: para llegar, para escuchar, para charlar, para descansar.» Los siete videos de los espacios (boletería, escenario, charlas, stand, gazebo, descanso y 360), uno tras otro a pantalla completa y sin textos, a velocidad 1,25x: 3,2 s cada uno (22,4 s en total), conservando el mismo tramo de cada video; al terminar vuelve al primero.', 22.4, 'blinds')
 
 # ------------------------------------------------------------------ 14 · VOZ 5 · Oso sin conexión (sin textos: el oso corre en círculos y después aparece la app grande jugándose sola con la flechita)
 import math as _mm
