@@ -369,13 +369,8 @@ b = """<div class="s8-sequence">
 S('b nologo', 'Web y app', b, 'VOZ 3 · LU — Se escribe www.bioferia.com.ar y Enter abre la web casi a pantalla completa. Scroll suave; la ventana se reduce a la izquierda y entra el celular desde Inicio. Un cursor de mano abre el quiz de ropa, elige una respuesta, continúa y muestra la elección junto a otras miradas. Secuencia de 26 s: app desde el segundo 8, comparación desde el 22. Scroll web continuo a ritmo intermedio constante (230 px/s), sin forzar la llegada al final; sigue moviendose al costado y despues del quiz, sin hoja flotante. Al volver a entrar, todo se reinicia.', 26, 'blinds')
 
 # ------------------------------------------------------------------ 09 · VOZ 4 · todo lo que estamos sumando
-b = ''
-b += PH('Video · persona caminando con el celu frente a un afiche', 620, 90, 1200, 675, fx='fr', d=.3, r=1.2)
-for i, (p, y, r) in enumerate([('assets/ig/feed/f05.jpg', 110, -4), ('assets/yt/cel-1.jpg', 400, 3), ('assets/posters/poster03.jpg', 690, -3)]):
-    b += E(p, 100 + (i % 2) * 120, y, 330, fx=['fl', 'fl', 'fl'][i], d=.6 + i * .5, r=r, lp='fl', ld=6 + i, z=3)
-b += T('Fíjense todo lo<br>que estamos <span class="y">sumando</span>', 620, 810, 80, fx='fb', sp=True, d=1.2, lh='.98')
-b += ST('Redes · web · app', 1500, 840, 'vi', 'pop', d=2.4, r=-3, size=30)
-S('a', 'Todo lo que estamos sumando', b, 'VOZ 4 · JOR — «Fíjense todo lo que estamos sumando: BioFeria ya no necesita esperar a que abran sus puertas para conectar con las personas.» Repaso rápido de redes, web y app; la persona caminando con el celu frente a un afiche.', 40, 'up')
+b = BL('<div class="bleed"><video class="av" data-src="assets/Bioferia-app-19s-estable-v2-cortes.mp4" muted playsinline preload="none"></video></div>')
+S('a clean', 'Todo lo que estamos sumando', b, 'VOZ 4 · JOR - «Fíjense todo lo que estamos sumando: BioFeria ya no necesita esperar a que abran sus puertas para conectar con las personas.» Solo el video Bioferia-app-19s-estable-v2-cortes a pantalla completa, sin elementos superpuestos. Dura 19 s, sin audio; queda en el último cuadro y reinicia al volver a entrar.', 19, 'up')
 
 # ------------------------------------------------------------------ 10 · VOZ 4 · ¡Y por fin llegamos!
 b = VB('assets/espacios/entrada-apertura.mp4', 'assets/espacios/3di-entrada.jpg')
