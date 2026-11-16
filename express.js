@@ -66,6 +66,10 @@
 
   /* ---- video / iframes ---- */
   function media(i){
+    if(window.BioferiaSlide8){
+      window.BioferiaSlide8.stop();
+      if(slides[i].querySelector(".s8-sequence")) window.BioferiaSlide8.start(slides[i]);
+    }
     slides.forEach(function(s,k){
       var on=(k===i);
       s.classList.remove('stories-on');

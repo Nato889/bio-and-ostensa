@@ -13,8 +13,10 @@ const {placeDetailView}=__r('place-details.js');
 const {placeAsset}=__r('map-data.js');
 const {mapView,sectorView,foodView}=__r('map-views.js');
 const app=document.querySelector('#app');
-let storage;try{storage=window.localStorage;}catch{storage={getItem(){},setItem(){throw Error();}};}
+const pitchDemo=location.pathname.endsWith('/pitch.html');
+let storage;if(pitchDemo){const memory={};storage={getItem(key){return memory[key]||null;},setItem(key,value){memory[key]=value;}};}else{try{storage=window.localStorage;}catch{storage={getItem(){},setItem(){throw Error();}};}}
 let state=readState(storage), selected={}, email='', toastTimer, mapZoom=false;
+if(pitchDemo)state.onboarded=true;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const find=id=>activities.find(a=>a.id===id), place=id=>places.find(p=>p.id===id);
 const route=()=>{const raw=location.hash.slice(1)||'home';const [path,query]=raw.split('?');return {parts:path.split('/'),query:new URLSearchParams(query),path};};
@@ -69,7 +71,7 @@ async function copyLink(url){try{await navigator.clipboard.writeText(url);toast(
 async function downloadCard(id){await document.fonts.ready;const c=document.createElement('canvas');c.width=1080;c.height=1080;const x=c.getContext('2d');x.fillStyle='#332e34';x.fillRect(0,0,1080,1080);if(id==='consumo'){const gradient=x.createLinearGradient(0,1080,1080,840);gradient.addColorStop(0,'#332e34');gradient.addColorStop(1,'#f0eee4');x.fillStyle=gradient;x.fillRect(0,0,1080,1080);const shade=x.createLinearGradient(0,0,0,1080);shade.addColorStop(0,'#332e34');shade.addColorStop(.47,'#332e34e6');shade.addColorStop(.76,'#332e3400');x.fillStyle=shade;x.fillRect(0,0,1080,1080);const figures=new Image();figures.src='./assets/backgrounds/figures.webp';await figures.decode();x.save();x.translate(1048,0);x.scale(-1,1);x.drawImage(figures,0,735,240,340);x.restore();}x.fillStyle='#f0eee4';x.font='500 30px Barlow';x.fillText(id==='consumo'?'BIOFERIA / ROPA':'BIOFERIA / COEXISTENCIA',70,100);x.font='700 94px Barlow';x.fillText(id==='alimentacion'?'MÁS ALLÁ':'¿LO NECESITO',70,330);x.fillStyle='#f34731';x.font='130px Efrancd';x.fillText(id==='alimentacion'?'DEL PLATO.':'O LO DESEO?',70,480);x.fillStyle='#f0eee4';x.font='400 42px Barlow';x.fillText(id==='consumo'?'Otra mirada sobre la ropa que elegís.':'Dale otra vuelta a lo cotidiano.',70,650);const logo=new Image();logo.src='./assets/logo.webp';await logo.decode();x.drawImage(logo,70,920,300,57);const blob=await new Promise(resolve=>c.toBlob(resolve,'image/png'));if(!blob)throw Error('canvas');const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='bioferia-otra-mirada-'+id+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 installDetailNavigation(render,captureMapCenter);
 window.addEventListener('hashchange',render);
-window.addEventListener('storage',e=>{if(e.key===STORAGE_KEY){state=readState(storage);render();}});
+window.addEventListener('storage',e=>{if(!pitchDemo&&e.key===STORAGE_KEY){state=readState(storage);render();}});
 const opening=initialRoute(location.hash,state.onboarded);if(location.hash!=='#'+opening)window.history.replaceState(null,'','#'+opening);render();
 
 function charlasPage(){

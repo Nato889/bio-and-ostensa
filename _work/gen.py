@@ -361,15 +361,14 @@ b += '<div class="celu fx f-zoom" style="--d:.5s;--r:-2deg;left:745px;top:105px;
 b += '</div>'
 S('a clean', 'Redes', b, 'VOZ 3 · LU — «Pasás el dedo por un feed que va rápido, y algo te frena. Abrís una historia, y otra, y empiezan a moverse…» Primero el video completo del feed de Instagram; al terminar aparecen las tiras de historias estaticas y animadas con el celular pasando historias al medio.', 40, 'left')
 
-# ------------------------------------------------------------------ 08 · VOZ 3 · web y app
-b = ''
-b += T('Y si quieren más, <span class="y">entran</span>', 96, 60, 70, fx='fl', d=.1, sp=True)
-b += '<div class="browser fx f-fl" style="--d:.4s;--r:-1deg;left:96px;top:190px;width:1040px;height:760px"><div class="bar"><b></b><b></b><b></b><span style="margin-left:14px">bioferia.com.ar</span></div><div style="position:relative;width:1040px;height:722px;overflow:hidden"><iframe class="pitch-web" data-ld="200" data-src="web-demo/index.html" title="web" style="position:absolute;left:0;top:0;width:1440px;height:999px;border:0;transform:scale(.7222);transform-origin:0 0;pointer-events:none" tabindex="-1"></iframe></div></div>'
-b += PHONE('app-real/local.html?reset#welcome/0', 1230, 190, w=300, fx='fb', d=.9, r=-2, ld=7, lms=900)
-b += PHONE('app-real/local.html?reset#quiz/consumo', 1560, 250, w=300, fx='fb', d=1.2, r=3, ld=8, lms=1800)
-b += ST('Web', 110, 965, 'dk', 'pop', d=2.0, r=-2, size=24, z=8)
-b += ST('App · una pregunta por día', 1330, 940, 'rd', 'pop', d=2.3, r=2, size=24, z=8)
-S('b', 'Web y app', b, 'VOZ 3 · LU — «Podemos seguir alimentándola desde la web… y para todos los días, una app que te acompaña en el bolsillo. Cada día te hace una pregunta, de esas que se contestan en un segundo.» La web real y la app real.', 60, 'blinds')
+# ------------------------------------------------------------------ 08 · VOZ 3 · URL, web y recorrido completo del quiz
+b = """<div class="s8-sequence">
+<div class="browser s8-browser"><div class="bar"><b></b><b></b><b></b><span>www.bioferia.com.ar</span></div><div class="s8-web-viewport"><iframe class="s8-web" title="Recorrido por la web de Bioferia" tabindex="-1"></iframe></div></div>
+<div class="s8-address"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="13" cy="13" r="9"/><path d="m20 20 9 9"/></svg><span class="s8-typed"></span><span class="s8-enter">Enter ↵</span></div>
+<div class="s8-phone"><div class="s8-phone-screen"><iframe class="s8-app" title="Demo animada del quiz de Bioferia" tabindex="-1"></iframe></div></div>
+<div class="s8-caption">Una pregunta por día. Otras formas de mirar.</div><div class="s8-status" role="status"></div>
+</div>"""
+S('b nologo', 'Web y app', b, 'VOZ 3 · LU — Se escribe www.bioferia.com.ar y Enter abre la web casi a pantalla completa. Scroll suave; la ventana se reduce a la izquierda y entra el celular desde Inicio. Un cursor de mano abre el quiz de ropa, elige una respuesta, continúa y muestra la elección junto a otras miradas. La comparación queda visible. Al volver a entrar, todo se reinicia.', 60, 'blinds')
 
 # ------------------------------------------------------------------ 09 · VOZ 4 · todo lo que estamos sumando
 b = ''
