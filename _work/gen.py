@@ -341,10 +341,8 @@ b = BL('<div class="bleed"><video class="av" data-src="assets/coexistencia-voz2-
 S('a clean', 'Coexistencia', b, 'VOZ 2 · SOLE — «De ahí nace nuestra propuesta: COEXISTENCIA.» Video completo de la pantalla 4 (38,5 s) a pantalla completa, desde el segundo 0: la palabra COEXISTENCIA y después las cuatro maneras (conectar, intercambiar, accionar, hibridar). Sin textos ni otros elementos; no hace loop (queda en el último cuadro).', 39, 'diag')
 
 # ------------------------------------------------------------------ 05 · VOZ 2 · Sumate a encontrar lo que falta
-b = ''
-b += V('assets/tagline/tagline-estilos.mp4', 'assets/tagline/tagline-estilos.jpg', 96, 100, 1728, 700, fx='fl', d=.1, r=-.5, cls='card')
-b += T('Sumate a encontrar <span class="y">lo que falta.</span>', 96, 850, 100, fx='fb', sp=True, d=.8)
-S('a', 'Sumate a encontrar lo que falta', b, 'VOZ 2 · SOLE — «Sumate a encontrar lo que falta. Porque a toda feria le falta algo, y la mejor forma de encontrarlo es entre muchos.» Cartel animado.', 50, 'up')
+b = BL('<div class="bleed"><video class="av" data-src="assets/tagline/voz-2-reloj-con-tagline-14s.mp4" muted playsinline preload="none"></video></div>')
+S('a clean', 'Sumate a encontrar lo que falta', b, 'VOZ 2 · SOLE - «Sumate a encontrar lo que falta. Porque a toda feria le falta algo, y la mejor forma de encontrarlo es entre muchos.» Solo el video del reloj con tagline a pantalla completa, sin elementos superpuestos. Dura 14 s, sin audio; al terminar queda en el último cuadro. Reinicia al volver a entrar.', 14, 'up')
 
 # ------------------------------------------------------------------ 06 · VOZ 3 · el afiche de la calle (tres videos empalmados, a pantalla completa, sin textos)
 b = BL('<div class="bleed vch" data-rate="1" data-rates="1.8,1,1.1,1.67" data-lens="0,0,0,5.9" style="background:#111"><video data-src="assets/calle/calle1.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle2-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle3-b.mp4" muted playsinline preload="none"></video><video data-src="assets/calle/calle4-sin-cuadro-final.mp4" muted playsinline preload="none"></video></div>')
